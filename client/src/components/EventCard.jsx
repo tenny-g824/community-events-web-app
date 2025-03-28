@@ -10,7 +10,8 @@ export default function EventCard() {
                 <div className="flex flex-col fixed inset-0 bg-slate bg-opacity-40 backdrop-blur-md p-6 items-center justify-center">
                     <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
                         <button aria-label="close"
-                            className="absolute top-0 right-4 text-gray-800 px-79 py-9 text-5xl cursor-pointer"
+                            className="absolute top-0 right-4 text-gray-800 text-5xl cursor-pointer"
+                            //px-79 py-9 
                             onClick={() => setIsEventModalOpen(false)}
                         >
                             &times;
