@@ -9,13 +9,14 @@ export default function EventCard() {
             <dialog open={isEventModalOpen}>
                 <div className="flex flex-col fixed inset-0 bg-slate bg-opacity-40 backdrop-blur-md p-6 items-center justify-center">
                     <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-                        <button aria-label="close"
-                            className="absolute top-0 right-4 text-gray-800 text-5xl cursor-pointer"
-                            //px-79 py-9 
-                            onClick={() => setIsEventModalOpen(false)}
-                        >
-                            &times;
-                        </button>
+                        <div className="absolute top-0 right-4 text-gray-800 px-86 py-8 w-40 h-40 text-5xl">
+                            <button aria-label="close"
+                                className="cursor-pointer"
+                                onClick={() => setIsEventModalOpen(false)}
+                            >
+                                &times;
+                            </button>
+                        </div>
                         <img src="/community-clean-up-img.jpg" alt="Community Clean-up Day" className="w-full h-74 object-cover rounded-t-xl" />
                         <div className="p-8">
                             <h2 className="text-3xl font-bold mb-6"> Community Clean-Up Day</h2>
