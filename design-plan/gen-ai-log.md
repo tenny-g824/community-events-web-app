@@ -8,8 +8,7 @@ I used Generative AI to help me produce the name of my category filters for all 
 2. Cultural & Arts
 3. Educational & Informative
 4. Social & Networking
-5. Health & Recreation
-6. Civic Engagement & Fundraising
+5. Health, Recreation & Charity
 
 I also used Generative AI to help me in producing my 20 Community Engagement Events:
 

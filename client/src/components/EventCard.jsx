@@ -9,7 +9,7 @@ export default function EventCard() {
             <dialog open={isEventModalOpen}>
                 <div className="flex flex-col fixed inset-0 bg-slate bg-opacity-40 backdrop-blur-md p-6 items-center justify-center">
                     <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full">
-                        <div className="absolute top-0 right-4 text-gray-800 px-85 py-10 w-40 h-40 text-5xl">
+                        <div className="absolute top-0 right-4 text-gray-800 px-86.5 py-10 w-40 h-40 text-5xl">
                             <button aria-label="close"
                                 className="cursor-pointer"
                                 onClick={() => setIsEventModalOpen(false)}

@@ -15,9 +15,44 @@ export default function Home() {
 
       <div className="my-14"></div>
 
-      <CategoryFilters />
+      <div className="flex">
+        <CategoryFilters
+          category="Volunteer & Service"
+          onClickFilter={() => {
+            console.log("Volunteer & Service")}
+          }
+        />
 
-      <div className="my-10"></div>
+        <CategoryFilters
+          category="Cultural & Arts"
+          onClickFilter={() => {
+            console.log("Cultural & Arts")}
+          }
+        />
+
+        <CategoryFilters
+          category="Educational & Informative"
+          onClickFilter={() => {
+            console.log("Educational and Informative")}
+          }
+        />
+
+        <CategoryFilters
+          category="Social & Networking"
+          onClickFilter={() => {
+            console.log("Social & Networking")}
+          }
+        />
+
+        <CategoryFilters
+          category="Health, Recreation & Charity"
+          onClickFilter={() => {
+            console.log("Health, Recreation & Charity")}
+          }
+        />
+      </div>
+
+      <div className="my-2"></div>
 
       <div className="flex space-x-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <EventCard />
