@@ -1,5 +1,4 @@
 use ('app');
-// use('mongodb://localhost:27017/app');
 
 db.ithacaCommunityEngagement.drop();
 db.createCollection('ithacaCommunityEngagement');
