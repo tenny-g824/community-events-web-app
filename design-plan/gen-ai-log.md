@@ -2,13 +2,46 @@
 
 As required in the syllabus, log all generative AI usage in this file for this assignment.
 
-I used Generative AI to help me produce the name of my category filters for all my events:
+I used Generative AI to help me produce the name of my category filters for my events:
 
 1. Volunteer & Service
+
+    - Community Clean-Up Day
+    - Neighborhood Potluck
+    - Volunteer Appreciation Day
+    - Food Bank Drive
+    - Youth Mentoring Meetup
+
 2. Cultural & Arts
+
+    - Art in the Park
+    - Multicultural Festival
+    - Community Theatre Night
+    - Local History Walk
+
 3. Educational & Informative
+
+    - Local History Walk
+    - Community Garden Workshop
+    - Literacy Workshop
+    - Senior Tech Day
+    - Environmental Awareness Fair
+
 4. Social & Networking
+
+    - Local Business Fair
+    - Neighborhood Block Party
+    - Neighborhood Potluck
+    - Cornell Winter Charity Gala
+
 5. Health, Recreation & Charity
+
+    - Health and Wellness Expo
+    - Community Sports Day
+    - Blood Donation Camp
+    - Town Hall Meeting
+    - Cornell Winter Charity Gala
+
 
 I also used Generative AI to help me in producing my 20 Community Engagement Events:
 
@@ -22,7 +55,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 85
 
-    Price: Free
+    Price: 0.00
 
 2. Neighborhood Potluck
 
@@ -34,7 +67,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 46
 
-    Price: Free
+    Price: 0.00
 
 3. Local History Walk
 
@@ -46,7 +79,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 37
 
-    Price: Free
+    Price: 0.00
 
 4. Community Garden Workshop
 
@@ -58,7 +91,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 43
 
-    Price: $10
+    Price: 10
 
 5. Art in the Park
 
@@ -70,7 +103,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 67
 
-    Price: Free
+    Price: 0.00
 
 6. Local Business Fair
 
@@ -82,7 +115,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 111
 
-    Price: Free
+    Price: 0.00
 
 7. Volunteer Appreciation Day
 
@@ -94,7 +127,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 51
 
-    Price: Free
+    Price: 0.00
 
 8. Youth Mentoring Meetup
 
@@ -106,7 +139,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 25
 
-    Price: Free
+    Price: 0.00
 
 9. Senior Tech Day
 
@@ -118,7 +151,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 23
 
-    Price: Free
+    Price: 0.00
 
 10. Environmental Awareness Fair
 
@@ -130,7 +163,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 49
 
-    Price: Free
+    Price: 0.00
 
 11. Multicultural Festival
 
@@ -142,7 +175,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 84
 
-    Price: Free
+    Price: 0.00
 
 12. Health and Wellness Expo
 
@@ -154,7 +187,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 78
 
-    Price: Free
+    Price: 0.00
 
 13. Literacy Workshop
 
@@ -166,7 +199,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 22
 
-    Price: Free
+    Price: 0.00
 
 14. Community Theatre Night
 
@@ -178,7 +211,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 58
 
-    Price: $12
+    Price: 12
 
 15. Neighborhood Block Party
 
@@ -190,7 +223,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 34
 
-    Price: Free
+    Price: 0.00
 
 16. Food Bank Drive
 
@@ -202,7 +235,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 75
 
-    Price: Free
+    Price: 0.00
 
 17. Blood Donation Camp
 
@@ -214,7 +247,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 50
 
-    Price: Free
+    Price: 0.00
 
 18. Community Sports Day
 
@@ -226,7 +259,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 120
 
-    Price: Free
+    Price: 0.00
 
 19. Town Hall Meeting
 
@@ -238,7 +271,7 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 60
 
-    Price: Free
+    Price: 0.00
 
 20. Cornell Winter Charity Gala
 
@@ -250,4 +283,4 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
 
     Number of Attendees: 74
 
-    Price: $25
+    Price: 25
