@@ -34,17 +34,11 @@ export default [
         { allowConstantExport: true },
       ],
       'no-unused-vars': ['warn'],
+      "no-console": "warn",
+      curly: "error",
+      "no-var": "error",
       'react/prop-types': ['off'],
       "react-hooks/rules-of-hooks": "off"
     },
-    overrides: [
-      {
-        files: ["*.mongodb.js"],
-        globals: {
-          use: "readonly",
-          db: "readonly"
-        }
-      }
-    ]
   },
 ]
