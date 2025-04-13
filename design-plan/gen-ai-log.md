@@ -2,6 +2,8 @@
 
 As required in the syllabus, log all generative AI usage in this file for this assignment.
 
+## Milestone 1
+
 I used Generative AI to help me produce the name of my category filters for my events:
 
 1. Volunteer & Service
@@ -284,3 +286,199 @@ I also used Generative AI to help me in producing my 20 Community Engagement Eve
     Number of Attendees: 74
 
     Price: 25
+
+## Milestone 2: Designing a RESTful API
+
+### Event Endpoints
+
+I used OpenAI ChatGPT as my tool.
+
+My prompt to ChatGPT was: Design a RESTful API to access a collection of community events. Each event should have name, dateAndTime, location, description, number of attendees, and price. Include endpoints to get, create, update, and delete events. Also include endpoints to RSVP to an event and cancel RSVP. For each endpoint, provide the HTTP method, URI, request body (if needed), query parameters (if any), and expected response status and response body.
+
+1. **Get All Events**
+
+- CRUD Operation: Read (collection)
+- HTTP Method: GET
+- URI: `/api/events`
+- Query Parameters:
+  - `category`: Filters events by a specific category (e.g. "Volunteer & Service", "Cultural & Arts").
+- Request Body (example request): GET /api/events?category=Volunteer%26Service
+- Response Status: 200 OK
+- Response Body: JSON array of events
+
+Response Body Example:
+
+  ```json
+  [
+    {
+       "id": "",
+       "name": "Community Clean-Up Day",
+       "dateAndTime": "2025-05-15T09:00:00Z",
+       "location": "Stewart Park, Ithaca, NY",
+       "description": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
+       "numberOfAttendees": 85,
+       "price": 0.00
+    },
+    ...
+  ]
+  ```
+
+1. **Get Event by ID**
+
+- CRUD Operation: Read (document)
+- HTTP Method: GET
+- URI: `/api/events/:id`
+- Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
+- Request Body: None
+- Response Status: 200 OK
+- Response Body: JSON event object
+
+Response Body Example:
+
+  ```json
+  {
+    "id": "abc123",
+    "name": "Community Clean-Up Day",
+    "dateAndTime": "2025-05-15T09:00:00Z",
+    "location": "Stewart Park, Ithaca, NY",
+    "description": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
+    "numberOfAttendees": 85,
+    "price": 0.00
+  }
+  ```
+
+1. **Create Event**
+
+- CRUD Operation: Create (document)
+- HTTP Method: POST
+- URI: `/api/events`
+- Query Parameter: None (data is sent in the request body, not as query parameters)
+- Request Body:
+
+Request Body Example:
+
+  ```json
+  {
+    "name": "Cornell Winter Charity Gala",
+    "dateAndTime": "2025-12-15T19:30:00Z",
+    "location": "The Statler Hotel, 130 Statler Dr, Ithaca, NY",
+    "description": "A formal event to raise funds for local charities during the holiday season. Limited tickets available, so reserve yours early!",
+    "numberOfAttendees": 74,
+    "price": 25.00
+  }
+  ```
+
+- Response Status: 201 Created
+- Response Body: JSON of created event
+
+Response Body Example:
+
+  ```json
+  {
+    "id": "bc90g7654",
+    "name": "Cornell Winter Charity Gala",
+    "dateAndTime": "2025-12-15T19:30:00Z",
+    "location": "The Statler Hotel, 130 Statler Dr, Ithaca, NY",
+    "description": "A formal event to raise funds for local charities during the holiday season. Limited tickets available, so reserve yours early!",
+    "numberOfAttendees": 74,
+    "price": 25.00
+  }
+  ```
+
+1. **Update Event**
+
+- CRUD Operation: Update (replace doc)
+- HTTP Method: PUT
+- URI: `/api/events/:id`
+- Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
+- Request Body:
+
+Request Body Example:
+
+  ```json
+  {
+    "name": "Neighborhood Potluck",
+    "dateAndTime": "2025-06-10T12:00:00Z",
+    "location": "Ithaca Commons Community Center, Ithaca, NY",
+    "description": "Neighbors share homemade dishes and connect over food.",
+    "numberOfAttendees": 46,
+    "price": 0.00
+  }
+  ```
+
+- Response Status: 200 OK
+- Response Body: JSON returning updated event
+
+Response Body Example:
+
+  ```json
+  {
+    "id": "458jef4",
+    "name": "Neighborhood Potluck",
+    "dateAndTime": "2025-06-10T12:00:00Z",
+    "location": "Ithaca Commons Community Center, Ithaca, NY",
+    "description": "Neighbors share homemade dishes and connect over food.",
+    "numberOfAttendees": 46,
+    "price": 0.00
+  }
+  ```
+
+1. **Delete Event**
+
+- CRUD Operation: Delete (document)
+- HTTP Method: DELETE
+- URI: `/api/events/:id`
+- Query Parameters: None (the event ID is passed as a path parameter)
+- Request Body: None
+- Response Status: 204 No Content
+- Response Body: None
+
+### RSVP Endpoints
+
+1. **RSVP to Event**
+
+- CRUD Operation: Create (document)
+- HTTP Method: POST
+- URI: `/api/events/:id/rsvp`
+- Query Parameters: None (data is sent in the request body or not required)
+- Request Body: Optional user info. If no user info is provided, the RSVP will be anonymous.
+
+Request Body Example:
+
+  ```json
+  {
+    "userId": "786mf5rt", // Optional
+    "name": "Angela Bassett" // Optional
+  }
+  ```
+
+- Response Status: 200 OK
+- Response Body: Confirmation message
+
+Response Body Example:
+
+  ```json
+  {
+    "message": "RSVP Confirmed",
+    "eventId": "86r7z56",
+    "userId": "786mf5rt" // Will be null if RSVP is anonymous
+  }
+  ```
+
+1. **Cancel RSVP**
+
+- CRUD Operation: Delete (document)
+- HTTP Method: DELETE
+- URI: `/api/events/:id/rsvp`
+- Query Parameters: None (the event ID is passed as a path parameter)
+- Request Body: None
+- Response Status: 200 OK
+- Response Body: Confirmation message
+
+Response Body Example:
+
+  ```json
+  {
+    "message": "RSVP Successfully Canceled"
+  }
+  ```
