@@ -179,7 +179,7 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
 });
 
 /*
-This DELETE endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 204 status code on success with a message or a 404 with a message on failure.
+This DELETE endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 200 status code on success with a message or a 404 with a message on failure.
 */
 app.delete('/api/events/:id/rsvp', async (req, res) => {
   const id = req.params.id;
@@ -192,7 +192,7 @@ app.delete('/api/events/:id/rsvp', async (req, res) => {
     );
 
     if (rsvpCancellation.modifiedCount > 0) {
-      return res.status(204).json({ message: 'RSVP Successfully Canceled' });
+      return res.status(200).json({ message: 'RSVP Successfully Canceled' });
     } else {
       return res.status(404).json({ message: 'RSVP Not Found or Already Canceled' });
     }

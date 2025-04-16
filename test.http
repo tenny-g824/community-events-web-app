@@ -8,15 +8,6 @@
 ###
 # @name events
 GET /api/events
-
-HTTP/1.1 200  - OK
-x-powered-by: Express
-access-control-allow-origin: *
-content-type: application/json; charset=utf-8
-content-length: 2
-etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
-date: Wed, 16 Apr 2025 21:22:58 GMT
-connection: close
 /*
 ## Get Single Event by ID
 */
@@ -29,7 +20,16 @@ GET /api/events/{{ events[0]._id }}
 */
 ###
 # @name filtered_events
-GET /api/events?category={{"volunteer"}}
+GET /api/events?category=volunteer
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 12433
+etag: W/"3091-yYmOpuk0iBGxQVO1gu5lA5iGUts"
+date: Wed, 16 Apr 2025 22:07:59 GMT
+connection: close
 /*
 ## Create Event
 */
@@ -87,7 +87,7 @@ Content-Type: application/json
 ###
 # @ref events
 # @name delete_event
-DELETE /api/events/{{ animals[6]._id }}
+DELETE /api/events/{{ events[6]._id }}
 /*
 ## RSVP to an Event
 */
@@ -101,4 +101,4 @@ POST /api/events/{{ events[7]._id }}/rsvp
 ###
 # @ref events
 # @name cancel_rsvp
-DELETE /api/events/{{ animals[15]._id }}/rsvp
+DELETE /api/events/{{ events[15]._id }}/rsvp
