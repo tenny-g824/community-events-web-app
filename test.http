@@ -17,6 +17,9 @@ content-length: 2
 etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
 date: Wed, 16 Apr 2025 14:19:17 GMT
 connection: close
+/*
+## Get Single Event by ID
+*/
 ###
 # @ref events
 # @name event_by_id
