@@ -1,9 +1,9 @@
 use ('app');
 
-db.ithacaCommunityEngagement.drop();
-db.createCollection('ithacaCommunityEngagement');
+db.events.drop();
+db.createCollection('events');
 
-db.ithacaCommunityEngagement.insertMany([
+db.events.insertMany([
     {
         name: "Community Clean-Up Day",
         category: "volunteer",
@@ -226,5 +226,5 @@ db.ithacaCommunityEngagement.insertMany([
     }
 ]);
 
-db.ithacaCommunityEngagement.find();
-db.ithacaCommunityEngagement.find({ category: { $in: ["volunteer"] } });
+db.events.find();
+db.events.find({ category: { $in: ["volunteer"] } });
