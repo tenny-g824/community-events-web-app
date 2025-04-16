@@ -3,7 +3,7 @@
 */
 @host http://localhost:8080
 /*
-# Get All Events
+## Get All Events
 */
 ###
 # @name events
@@ -17,21 +17,18 @@ content-length: 2
 etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
 date: Wed, 16 Apr 2025 14:19:17 GMT
 connection: close
-/*
-# Get Single Event by ID
-*/
 ###
 # @ref events
 # @name event_by_id
 GET /api/events/{{ events[0]._id }}
 /*
-# Get Events by Specific Category
+## Get Events by Specific Category
 */
 ###
 # @name filtered_events
 GET /api/events?category={{"volunteer"}}
 /*
-# Create Event
+## Create Event
 */
 ###
 # @ref events
@@ -50,7 +47,7 @@ Content-Type: application/json
     "price": 0.00
 }
 /*
-# Replace (Update) Existing Event
+## Replace (Update) Existing Event
 */
 ###
 # @ref events
@@ -69,7 +66,7 @@ Content-Type: application/json
     "price": 0.00
 }
 /*
-# Modify (Update) Existing Event
+## Modify (Update) Existing Event
 */
 ###
 # @ref events
@@ -82,21 +79,21 @@ Content-Type: application/json
     "location": "Cascadilla Park, Ithaca, NY"
 }
 /*
-# Delete Event
+## Delete Event
 */
 ###
 # @ref events
 # @name delete_event
 DELETE /api/events/{{ animals[6]._id }}
 /*
-# RSVP to an Event
+## RSVP to an Event
 */
 ###
 # @ref events
 # @name rsvp_event
 POST /api/events/{{ events[7]._id }}/rsvp
 /*
-# Cancel RSVP to an Event 
+## Cancel RSVP to an Event 
 */
 ###
 # @ref events
