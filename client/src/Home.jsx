@@ -1,6 +1,5 @@
-import React from 'react';
 import SearchEvent from './components/SearchEvent';
-import CategoryFilters from './components/CategoryFilters';
+import Chip from './components/Chip';
 import EventCard from './components/EventCard';
 
 export default function Home() {
@@ -15,40 +14,40 @@ export default function Home() {
 
       <div className="my-14"></div>
 
-      <div className="flex">
-        <CategoryFilters
+      {/* <div className="flex justify-center gap-x-3"> */}
+      <div className="flex gap-x-3">
+        <Chip
           category="Volunteer & Service"
-          onClickFilter={() => {
-            console.log("Volunteer & Service")}
-          }
+          // onClickChip={() => }
         />
 
-        <CategoryFilters
+        <Chip
           category="Cultural & Arts"
-          onClickFilter={() => {
-            console.log("Cultural & Arts")}
-          }
+          // onClickChip={}
+          // onClickChip={() => {
+          //   console.log("Cultural & Arts")}
+          // }
         />
 
-        <CategoryFilters
+        <Chip
           category="Educational & Informative"
-          onClickFilter={() => {
-            console.log("Educational and Informative")}
-          }
+          // onClickChip={() => {
+          //   console.log("Educational and Informative")}
+          // }
         />
 
-        <CategoryFilters
+        <Chip
           category="Social & Networking"
-          onClickFilter={() => {
-            console.log("Social & Networking")}
-          }
+          // onClickChip={() => {
+          //   console.log("Social & Networking")}
+          // }
         />
 
-        <CategoryFilters
-          category="Health, Recreation & Charity"
-          onClickFilter={() => {
-            console.log("Health, Recreation & Charity")}
-          }
+        <Chip
+          category="Health & Recreation"
+          // onClickChip={() => {
+          //   console.log("Health & Recreation")}
+          // }
         />
       </div>
 

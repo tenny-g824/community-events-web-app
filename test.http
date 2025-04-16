@@ -3,4 +3,75 @@
 */
 @host http://localhost:8080
 ###
-# TODO: test all API endpoints
+# @name events
+GET /api/events
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 2
+etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+date: Wed, 16 Apr 2025 14:19:17 GMT
+connection: close
+###
+# @ref events
+# @name event_by_id
+GET /api/events/{{ events[0]._id }}
+###
+# @name filtered_events
+GET /api/events?category={{"volunteer"}}
+###
+# @ref events
+# @name create_event
+POST /api/events/
+Content-Type: application/json
+
+{
+    "name": "Youth Mentoring Meetup",
+    "category": "volunteer",
+    "dateAndTime": "2025-05-25T17:00:00Z",
+    "location": "Ithaca Public Library, Ithaca, NY",
+    "summary": "Connecting youth with mentors from various professions.",
+    "description": "This event brings together young individuals seeking guidance with professionals from various fields. Mentors will share insights about career development, goal setting, and leadership. Attendees will have the chance to build lasting connections and participate in group activities.",
+    "numberOfAttendees": 25,
+    "price": 0.00
+}
+###
+# @ref events
+# @name replace_event
+PUT /api/events/{{ events[1]._id }}
+Content-Type: application/json
+
+{
+    "name": "Neighborhood Potluck",
+    "category": ["volunteer", "socials"],
+    "dateAndTime": "2025-06-10T12:00:00Z",
+    "location": "Ithaca Commons Community Center, Ithaca, NY",
+    "summary": "Neighbors share homemade dishes and connect over food.",
+    "description": "Bring your favorite dish and join us for a heartwarming potluck where neighbors gather to share homemade food, laughter, and stories. This event fosters community bonding, allowing residents to connect over diverse cuisines. Enjoy live acoustic music and kid-friendly activities throughout the day. Prizes will be awarded for the most creative dish.",
+    "numberOfAttendees": 46,
+    "price": 0.00
+}
+###
+# @ref events
+# @name modify_event
+PATCH /api/events/{{ events[2]._id }}
+Content-Type: application/json
+
+{
+    "numberOfAttendees": 100,
+    "location": "Cascadilla Park, Ithaca, NY"
+}
+###
+# @ref events
+# @name delete_event
+DELETE /api/events/{{ animals[6]._id }}
+###
+# @ref events
+# @name rsvp_event
+POST /api/events/{{ events[7]._id }}/rsvp
+###
+# @ref events
+# @name cancel_rsvp
+DELETE /api/events/{{ animals[15]._id }}/rsvp

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function EventCard() {
 
@@ -26,7 +26,7 @@ export default function EventCard() {
                                 <p><strong>Time:</strong> 9:00 AM</p>
                                 <p><strong>Location:</strong> Stewart Park, Ithaca, NY</p>
                                 <p><strong>Number of Attendees:</strong> 85</p>
-                                <p><strong>Price:</strong> Free</p>
+                                <p><strong>Price:</strong> $0.00</p>
                             </div>
                         </div>
                     </div>

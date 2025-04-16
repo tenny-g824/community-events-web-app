@@ -6,43 +6,42 @@ As required in the syllabus, log all generative AI usage in this file for this a
 
 I used Generative AI to help me produce the name of my category filters for my events:
 
-1. Volunteer & Service
+1. Volunteer & Service --> volunteer
 
-    - Community Clean-Up Day
-    - Neighborhood Potluck
-    - Volunteer Appreciation Day
-    - Food Bank Drive
-    - Youth Mentoring Meetup
+    - Community Clean-Up Day (index 0)
+    - Neighborhood Potluck (index 1)
+    - Volunteer Appreciation Day (index 6)
+    - Food Bank Drive (index 15)
+    - Youth Mentoring Meetup (index 7)
 
-2. Cultural & Arts
+2. Cultural & Arts --> culturalArts
 
     - Art in the Park
     - Multicultural Festival
     - Community Theatre Night
     - Local History Walk
 
-3. Educational & Informative
+3. Educational & Informative --> educationalInfo
 
     - Local History Walk
     - Community Garden Workshop
     - Literacy Workshop
     - Senior Tech Day
     - Environmental Awareness Fair
+    - Town Hall Meeting
 
-4. Social & Networking
+4. Social & Networking --> socials
 
     - Local Business Fair
     - Neighborhood Block Party
     - Neighborhood Potluck
     - Cornell Winter Charity Gala
 
-5. Health, Recreation & Charity
+5. Health & Recreation --> healthRecreation
 
     - Health and Wellness Expo
     - Community Sports Day
     - Blood Donation Camp
-    - Town Hall Meeting
-    - Cornell Winter Charity Gala
 
 
 I also used Generative AI to help me in producing my 20 Community Engagement Events:
@@ -295,190 +294,316 @@ I used OpenAI ChatGPT as my tool.
 
 My prompt to ChatGPT was: Design a RESTful API to access a collection of community events. Each event should have name, dateAndTime, location, description, number of attendees, and price. Include endpoints to get, create, update, and delete events. Also include endpoints to RSVP to an event and cancel RSVP. For each endpoint, provide the HTTP method, URI, request body (if needed), query parameters (if any), and expected response status and response body.
 
-1. **Get All Events**
+- **Get All Events**
 
-- CRUD Operation: Read (collection)
-- HTTP Method: GET
-- URI: `/api/events`
-- Query Parameters:
-  - `category`: Filters events by a specific category (e.g. "Volunteer & Service", "Cultural & Arts").
-- Request Body (example request): GET /api/events?category=Volunteer%26Service
-- Response Status: 200 OK
-- Response Body: JSON array of events
+  - CRUD Operation: Read (collection)
+  - HTTP Method: GET
+  - URI: `/api/events`
+  - Query Parameters: None
+  - Request Body: None
+  - Response Status: 200 OK
+  - Response Body: JSON array of events
 
-Response Body Example:
+- **Get Event by ID**
 
-  ```json
-  [
-    {
-       "id": "",
-       "name": "Community Clean-Up Day",
-       "dateAndTime": "2025-05-15T09:00:00Z",
-       "location": "Stewart Park, Ithaca, NY",
-       "description": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
-       "numberOfAttendees": 85,
-       "price": 0.00
-    },
-    ...
-  ]
-  ```
+  - CRUD Operation: Read (document)
+  - HTTP Method: GET
+  - URI: `/api/events/{id}`
+  - Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
+  - Request Body: None
+  - Response Status: 200 OK
+  - Response Body: JSON event object
 
-1. **Get Event by ID**
+- **Get All Events By a Specific Category**
 
-- CRUD Operation: Read (document)
-- HTTP Method: GET
-- URI: `/api/events/:id`
-- Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
-- Request Body: None
-- Response Status: 200 OK
-- Response Body: JSON event object
+  - CRUD Operation: Read (collection)
+  - HTTP Method: GET
+  - URI: `/api/events`
+  - Query Parameters:
+    - `category`: Filters events by a specific category (e.g. "Volunteer & Service", "Cultural & Arts").
+  - Request Body (example request): GET /api/events?category=Volunteer%26Service
+  - Response Status: 200 OK
+  - Response Body: JSON array of events
 
-Response Body Example:
+- **Create Event**
 
-  ```json
-  {
-    "id": "abc123",
-    "name": "Community Clean-Up Day",
-    "dateAndTime": "2025-05-15T09:00:00Z",
-    "location": "Stewart Park, Ithaca, NY",
-    "description": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
-    "numberOfAttendees": 85,
-    "price": 0.00
-  }
-  ```
+  - CRUD Operation: Create (document)
+  - HTTP Method: POST
+  - URI: `/api/events`
+  - Query Parameter: None (data is sent in the request body, not as query parameters)
+  - Request Body: JSON
+  - Response Status: 201 Created
+  - Response Body: JSON of created event
 
-1. **Create Event**
+- **Update (replace) Event**
 
-- CRUD Operation: Create (document)
-- HTTP Method: POST
-- URI: `/api/events`
-- Query Parameter: None (data is sent in the request body, not as query parameters)
-- Request Body:
+  - CRUD Operation: Update (replace doc)
+  - HTTP Method: PUT
+  - URI: `/api/events/{id}`
+  - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
+  - Request Body: JSON
+  - Response Status: 200 OK
+  - Response Body: JSON returning updated (replaced) event
 
-Request Body Example:
+- **Update (modify) Event**
 
-  ```json
-  {
-    "name": "Cornell Winter Charity Gala",
-    "dateAndTime": "2025-12-15T19:30:00Z",
-    "location": "The Statler Hotel, 130 Statler Dr, Ithaca, NY",
-    "description": "A formal event to raise funds for local charities during the holiday season. Limited tickets available, so reserve yours early!",
-    "numberOfAttendees": 74,
-    "price": 25.00
-  }
-  ```
+  - CRUD Operation: Update (modify doc)
+  - HTTP Method: PATCH
+  - URI: `/api/events/{id}`
+  - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
+  - Request Body: JSON
+  - Response Status: 200 OK
+  - Response Body: JSON returning modified event
 
-- Response Status: 201 Created
-- Response Body: JSON of created event
+- **Delete Event**
 
-Response Body Example:
+  - CRUD Operation: Delete (document)
+  - HTTP Method: DELETE
+  - URI: `/api/events/{id}`
+  - Query Parameters: None (the event ID is passed as a path parameter)
+  - Request Body: None
+  - Response Status: 204 No Content
+  - Response Body: None
 
-  ```json
-  {
-    "id": "bc90g7654",
-    "name": "Cornell Winter Charity Gala",
-    "dateAndTime": "2025-12-15T19:30:00Z",
-    "location": "The Statler Hotel, 130 Statler Dr, Ithaca, NY",
-    "description": "A formal event to raise funds for local charities during the holiday season. Limited tickets available, so reserve yours early!",
-    "numberOfAttendees": 74,
-    "price": 25.00
-  }
-  ```
-
-1. **Update Event**
-
-- CRUD Operation: Update (replace doc)
-- HTTP Method: PUT
-- URI: `/api/events/:id`
-- Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
-- Request Body:
-
-Request Body Example:
-
-  ```json
-  {
-    "name": "Neighborhood Potluck",
-    "dateAndTime": "2025-06-10T12:00:00Z",
-    "location": "Ithaca Commons Community Center, Ithaca, NY",
-    "description": "Neighbors share homemade dishes and connect over food.",
-    "numberOfAttendees": 46,
-    "price": 0.00
-  }
-  ```
-
-- Response Status: 200 OK
-- Response Body: JSON returning updated event
-
-Response Body Example:
-
-  ```json
-  {
-    "id": "458jef4",
-    "name": "Neighborhood Potluck",
-    "dateAndTime": "2025-06-10T12:00:00Z",
-    "location": "Ithaca Commons Community Center, Ithaca, NY",
-    "description": "Neighbors share homemade dishes and connect over food.",
-    "numberOfAttendees": 46,
-    "price": 0.00
-  }
-  ```
-
-1. **Delete Event**
-
-- CRUD Operation: Delete (document)
-- HTTP Method: DELETE
-- URI: `/api/events/:id`
-- Query Parameters: None (the event ID is passed as a path parameter)
-- Request Body: None
-- Response Status: 204 No Content
-- Response Body: None
 
 ### RSVP Endpoints
 
-1. **RSVP to Event**
+- **RSVP to Event**
 
-- CRUD Operation: Create (document)
-- HTTP Method: POST
-- URI: `/api/events/:id/rsvp`
-- Query Parameters: None (data is sent in the request body or not required)
-- Request Body: Optional user info. If no user info is provided, the RSVP will be anonymous.
+  - CRUD Operation: Create (document)
+  - HTTP Method: POST
+  - URI: `/api/events/{id}/rsvp`
+  - Query Parameters: None (data is sent in the request body or not required)
+  - Request Body: Optional user info. If no user info is provided, the RSVP will be anonymous.
+  - Response Status: 200 OK
+  - Response Body: JSON of Confirmation message
 
-Request Body Example:
+- **Cancel RSVP**
 
-  ```json
-  {
-    "userId": "786mf5rt", // Optional
-    "name": "Angela Bassett" // Optional
+  - CRUD Operation: Delete (document)
+  - HTTP Method: DELETE
+  - URI: `/api/events/{id}/rsvp`
+  - Query Parameters: None (the event ID is passed as a path parameter)
+  - Request Body: None
+  - Response Status: 200 OK
+  - Response Body: JSON of Confirmation message
+
+
+### Endpoints: Prompts, Comments, Responses
+
+**My Prompt for Getting all Events:** Write code in JavaScript using Express (using a GET endpoint) to retrieve all events from a MongoDB events collection with no filters. If events are found, return them with a 200 status code.
+
+Response of Generated Code:
+
+```javascript
+app.get('/api/events', async (req, res) => {
+  const events = await db.collection('events').find().toArray()
+  res.status(200).json(events);
+});
+```
+
+**My Prompt for Getting a Single Event:** Write code in JavaScript using Express (using a GET endpoint) to retrieve a single event from a MongoDB events collection using its ID as a route parameter. If the ID is valid and the event is found, return it with a 200 status code. If the ID is invalid or the event is not found, return a 404 error.
+
+Response of Generated Code:
+
+```javascript
+app.get('/api/events/:id', async (req, res) => {
+  if (ObjectId.isValid(req.params.id)) {
+    const id = new ObjectId(req.params.id);
+    const event = await db.collection('events').findOne({ _id: new ObjectId(id) });
+    if (event) {
+      res.status(200).json(event);
+    } else {
+      res.status(404).send();
+    }
+  } else {
+    res.status(404).send();
   }
-  ```
+});
+```
 
-- Response Status: 200 OK
-- Response Body: Confirmation message
+**My Prompt for Filtering Events by Category:** Write JavaScript code using Express (using a GET endpoint) to get all events from a MongoDB events collection that match a specific category. The category should be passed as a query parameter (e.g., /api/events?category=volunteering). If events that are matching are found, return them with a 200 status code. If no events match, return a 404 error.
 
-Response Body Example:
+Response of Generated Code:
 
-  ```json
-  {
-    "message": "RSVP Confirmed",
-    "eventId": "86r7z56",
-    "userId": "786mf5rt" // Will be null if RSVP is anonymous
+```javascript
+app.get('/api/events', async (req, res) => {
+  const eventCategory = req.query.category;
+
+  let filteredEvents = {};
+  if (eventCategory) {
+    filteredEvents.category = eventCategory;
   }
-  ```
 
-1. **Cancel RSVP**
+  const events = await db.collection('events')
+    .find(filteredEvents)
+    .toArray();
 
-- CRUD Operation: Delete (document)
-- HTTP Method: DELETE
-- URI: `/api/events/:id/rsvp`
-- Query Parameters: None (the event ID is passed as a path parameter)
-- Request Body: None
-- Response Status: 200 OK
-- Response Body: Confirmation message
-
-Response Body Example:
-
-  ```json
-  {
-    "message": "RSVP Successfully Canceled"
+  if (events.length > 0) {
+    res.status(200).json(events);
+  } else {
+    res.status(404).send();
   }
-  ```
+});
+```
+
+**My Prompt for Creating an Event:** Write JavaScript code using Express (using a POST endpoint) to create a new event in a MongoDB events collection. The request should include required fields like name and category. If any required field is missing, return a 404 error. If the event is created successfully, return the created event with a 201 status code.
+
+Response of Generated Code:
+
+```javascript
+app.post('/api/events', async (req, res) => {
+  const newCommunityEvent = req.body;
+
+  if (!newCommunityEvent || !newCommunityEvent.name || !newCommunityEvent.category) {
+    res.status(400).json({ message: 'New Event Data Not Valid' });
+  }
+
+  const createStatus = await db.collection('events').insertOne(newCommunityEvent);
+  const createdEvent = await db.collection('events').findOne({ _id: createStatus.insertedId });
+  res.status(201).json(createdEvent);
+});
+```
+
+**My Prompt for Fully Updating (Replacing) an Event:** Write JavaScript code using Express (using a PUT endpoint) to fully replace an existing event in a MongoDB events collection using its ID. The request must have all required fields like name and category. If the event is found and replaced, return the updated event with a 200 status code. If the ID is invalid or the event is not found, return a 404 error. If the request body is missing required fields, return a 404 error.
+
+Response of Generated Code:
+
+```javascript
+app.put('/api/events/:id', async (req, res) => {
+  if (ObjectId.isValid(req.params.id)) {
+    const id = new ObjectId(req.params.id);
+    const updateEvent = req.body;
+
+    if (!updateEvent || !updateEvent.name || !updateEvent.category) {
+      res.status(404).send();
+    }
+
+    delete updateEvent._id; // Remove _id field from the request body
+
+    const replaceStatus = await db.collection('events').replaceOne(
+      { _id: id },
+      updateEvent
+    );
+
+    if (replaceStatus.modifiedCount > 0) {
+      const replacedEvent = await db.collection('events').findOne({ _id: id });
+      res.status(200).json(replacedEvent);
+    } else {
+      res.status(404).send();
+    }
+  } else {
+    res.status(404).send();
+  }
+});
+```
+
+**My Prompt for Partially Updating (Modifying) an Event:** Write JavaScript code using Express (using a PATCH endpoint) to partially update an event in a MongoDB events collection using its ID. The request can have one or more fields to update. If there are no fields provided to update, return a 404 error. If the ID is invalid or the event is not found, return a 404 error. If successful, return the updated event with a 200 status code.
+
+Response of Generated Code:
+
+```javascript
+app.patch('/api/events/:id', async (req, res) => {
+  if (ObjectId.isValid(req.params.id)) {
+    const id = new ObjectId(req.params.id);
+    const partiallyUpdateEvent = req.body;
+
+    if (!partiallyUpdateEvent || Object.keys(partiallyUpdateEvent).length === 0) {
+      res.status(404).send();
+    }
+
+    const modifyStatus = await db.collection('events').updateOne(
+      { _id: id },
+      { $set: partiallyUpdateEvent }
+    );
+
+    if (modifyStatus.modifiedCount > 0) {
+      const modifiedEvent = await db.collection('events').findOne({ _id: id });
+      res.status(200).json(modifiedEvent);
+    } else {
+      res.status(404).send();
+    }
+  } else {
+    res.status(404).send();
+  }
+});
+```
+
+**My Prompt for Deleting an Event:** Write JavaScript code using Express (using a DELETE endpoint) to delete an event from a MongoDB events collection using its ID. If the ID is invalid or the event doesn't exist, return a 404 error. If the event is successfully deleted, return a 204 status code with no content.
+
+Response of Generated Code:
+
+```javascript
+app.delete('/api/events/:id', async (req, res) => {
+  const id = req.params.id;
+  if (ObjectId.isValid(id)) {
+    const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
+
+    if (deleteEvent.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(404).send();
+    }
+  } else {
+    res.status(404).send();
+  }
+});
+```
+
+**My Prompt to RSVP to an Event:** Write code in JavaScript using Express (using a POST endpoint) to confirm an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, increase the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a confirmation message. If the event is not found or the ID is invalid, return a 404 error.
+
+Response of Generated Code:
+
+```javascript
+app.post('/api/events/:id/rsvp', async (req, res) => {
+  const id = req.params.id;
+
+  if (ObjectId.isValid(id)) {
+    const eventId = new ObjectId(id);
+    const rsvpConfirmation = await db.collection('events').updateOne(
+      { _id: eventId },
+      {
+        $addToSet: { rsvps: req.body.userId }, // Ensure no duplicate RSVPs
+        $inc: { numberOfAttendees: 1 } // Increment attendees count
+      }
+    );
+
+    if (rsvpConfirmation.modifiedCount > 0) {
+      res.status(200).json({ message: 'Confirmed!' });
+    } else {
+      res.status(404).json({ message: 'Cannot Confirm RSVP' });
+    }
+  } else {
+    res.status(404).send();
+  }
+});
+```
+
+**My Prompt to Cancel RSVP to an Event:** Write JavaScript code using Express (using a DELETE endpoint) to cancel an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, decrease the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a cancellation message. If the event is not found or the ID is invalid, return a 404 error.
+
+Response of Generated Code:
+
+```javascript
+app.delete('/api/events/:id/rsvp', async (req, res) => {
+  const id = req.params.id;
+
+  if (ObjectId.isValid(id)) {
+    const eventId = new ObjectId(id);
+    const rsvpCancellation = await db.collection('events').updateOne(
+      { _id: eventId },
+      {
+        $pull: { rsvps: req.body.userId }, // Remove the RSVP
+        $inc: { numberOfAttendees: -1 } // Decrement attendees count
+      }
+    );
+
+    if (rsvpCancellation.modifiedCount > 0) {
+      return res.status(204).json({ message: 'Success!' });
+    } else {
+      return res.status(404).json({ message: 'RSVP Not Found' });
+    }
+  } else {
+    return res.status(404).send();
+  }
+});
+```
