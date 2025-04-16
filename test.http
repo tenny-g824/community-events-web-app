@@ -2,6 +2,9 @@
 # Test the Server API
 */
 @host http://localhost:8080
+/*
+Get All Events
+*/
 ###
 # @name events
 GET /api/events
@@ -14,6 +17,9 @@ content-length: 2
 etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
 date: Wed, 16 Apr 2025 14:19:17 GMT
 connection: close
+/*
+Get Event by ID
+*/
 ###
 # @ref events
 # @name event_by_id
