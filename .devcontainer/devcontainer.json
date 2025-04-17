@@ -142,6 +142,7 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"waitFor": "onCreateCommand",
 	"postCreateCommand": {
+		"initDatabase": "mongosh init.mongodb.js",
 		"installPackages": "npm install"
 	},
 	"postStartCommand": {
