@@ -21,17 +21,8 @@ GET /api/events/{{ events[0]._id }}
 ###
 # @name filtered_events
 GET /api/events?category=volunteer
-
-HTTP/1.1 200  - OK
-x-powered-by: Express
-access-control-allow-origin: *
-content-type: application/json; charset=utf-8
-content-length: 12433
-etag: W/"3091-yYmOpuk0iBGxQVO1gu5lA5iGUts"
-date: Wed, 16 Apr 2025 22:07:59 GMT
-connection: close
 /*
-## Create Event
+## Create an Event
 */
 ###
 # @ref events
@@ -40,13 +31,13 @@ POST /api/events/
 Content-Type: application/json
 
 {
-    "name": "Youth Mentoring Meetup",
+    "name": "Senior Center Tech Help Day",
     "category": "volunteer",
-    "dateAndTime": "2025-05-25T17:00:00Z",
-    "location": "Ithaca Public Library, Ithaca, NY",
-    "summary": "Connecting youth with mentors from various professions.",
-    "description": "This event brings together young individuals seeking guidance with professionals from various fields. Mentors will share insights about career development, goal setting, and leadership. Attendees will have the chance to build lasting connections and participate in group activities.",
-    "numberOfAttendees": 25,
+    "dateAndTime": "2025-07-10T13:30:00Z",
+    "location": "Lifelong Senior Center, Ithaca, NY",
+    "summary": "Assist seniors with learning basic technology skills.",
+    "description": "Join us in bridging the digital divide by volunteering to help seniors with smartphones, tablets, and computers. Whether it's setting up email or teaching how to video chat with family, your time will make a big difference. No advanced tech experience needed—just patience and kindness.",
+    "numberOfAttendees": 20,
     "price": 0.00
 }
 /*
@@ -55,18 +46,18 @@ Content-Type: application/json
 ###
 # @ref events
 # @name replace_event
-PUT /api/events/{{ events[1]._id }}
+PUT /api/events/{{ events[6]._id }}
 Content-Type: application/json
 
 {
-    "name": "Neighborhood Potluck",
-    "category": ["volunteer", "socials"],
-    "dateAndTime": "2025-06-10T12:00:00Z",
-    "location": "Ithaca Commons Community Center, Ithaca, NY",
-    "summary": "Neighbors share homemade dishes and connect over food.",
-    "description": "Bring your favorite dish and join us for a heartwarming potluck where neighbors gather to share homemade food, laughter, and stories. This event fosters community bonding, allowing residents to connect over diverse cuisines. Enjoy live acoustic music and kid-friendly activities throughout the day. Prizes will be awarded for the most creative dish.",
-    "numberOfAttendees": 46,
-    "price": 0.00
+  "name": "Ithaca Wellness & Outreach Day",
+  "category": "volunteer",
+  "dateAndTime": "2025-07-03T08:30:00Z",
+  "location": "Cayuga Waterfront Trail, Ithaca, NY",
+  "summary": "A community 5K walk that promotes wellness and volunteer action for local clinics.",
+  "description": "Take part in a scenic 5K walk along the Cayuga Waterfront Trail. After the walk, volunteers can assist with setting up wellness booths, distributing health kits, or guiding participants. The event fosters both physical well-being and community service. Hydration stations, music, and free wellness giveaways will be available for all attendees.",
+  "numberOfAttendees": 150,
+  "price": 10.00
 }
 /*
 ## Modify (Update) Existing Event
@@ -74,7 +65,7 @@ Content-Type: application/json
 ###
 # @ref events
 # @name modify_event
-PATCH /api/events/{{ events[2]._id }}
+PATCH /api/events/{{ events[0]._id }}
 Content-Type: application/json
 
 {
@@ -87,18 +78,18 @@ Content-Type: application/json
 ###
 # @ref events
 # @name delete_event
-DELETE /api/events/{{ events[6]._id }}
+DELETE /api/events/{{ events[7]._id }}
 /*
 ## RSVP to an Event
 */
 ###
 # @ref events
 # @name rsvp_event
-POST /api/events/{{ events[7]._id }}/rsvp
+POST /api/events/{{ events[15]._id }}/rsvp
 /*
 ## Cancel RSVP to an Event 
 */
 ###
 # @ref events
 # @name cancel_rsvp
-DELETE /api/events/{{ events[15]._id }}/rsvp
+POST /api/events/{{ events[15]._id }}/cancel-rsvp

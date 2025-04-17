@@ -81,7 +81,6 @@ app.post('/api/events', async (req, res) => {
 
   const createStatus = await db.collection('events').insertOne(newCommunityEvent);
   const createdEvent = await db.collection('events').findOne({ _id: createStatus.insertedId });
-  // const createdEvent = { ...newCommunityEvent, _id: createStatus.insertedId };
   res.status(201).json(createdEvent);
 });
 
@@ -138,7 +137,7 @@ app.patch('/api/events/:id', async (req, res) => {
 });
 
 /*
-This DELETE endpoint from OpenAI ChatGPT correctly removes an event based on its Mongo ObjectId. It makes sure that the ID is valid and a matching document exists before attempting deletion with MongoDB's deleteOne(). A 204 status is returned if deletion is successful. Else, a 404 status code is returned if the event does not exist or has already been removed.
+This DELETE endpoint from OpenAI ChatGPT correctly removes an event based on its Mongo ObjectId. It makes sure that the ID is valid and a matching document exists before attempting deletion with MongoDB's deleteOne(). A 200 status is returned if deletion is successful. Else, a 404 status code is returned if the event does not exist or has already been removed.
 */
 app.delete('/api/events/:id', async (req, res) => {
   const id = req.params.id;
@@ -146,7 +145,7 @@ app.delete('/api/events/:id', async (req, res) => {
     const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
 
     if (deleteEvent.deletedCount > 0) {
-      res.status(204).send();
+      res.status(200).json({ message: 'Event Removed Successfully'});
     } else {
       res.status(404).send();
     }
@@ -179,9 +178,9 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
 });
 
 /*
-This DELETE endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 200 status code on success with a message or a 404 with a message on failure.
+This POST endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 200 status code on success with a message or a 404 with a message on failure.
 */
-app.delete('/api/events/:id/rsvp', async (req, res) => {
+app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
   const id = req.params.id;
 
   if (ObjectId.isValid(id)) {

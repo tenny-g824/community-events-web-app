@@ -223,7 +223,7 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
   - URI: `/api/events/:id`
   - Query Parameters: None (the event ID is passed as a path parameter)
   - Request Body: None
-  - Response Status: 204 No Content
+  - Response Status: 200 OK
   - Response Body: None
 
 
@@ -232,7 +232,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **RSVP to Event**
 
   - Brief Description: Allows a user to RSVP to an event. If no user information is provided, the RSVP will be anonymous
-  - CRUD Operation: Create (document)
   - HTTP Method: POST
   - URI: `/api/events/:id/rsvp`
   - Query Parameters: None (data is sent in the request body or not required)
@@ -251,10 +250,9 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 
 - **Cancel RSVP**
 
-  - Brief Description: Cancels or deletes a user's RSVP for an event
-  - CRUD Operation: Delete (document)
-  - HTTP Method: DELETE
-  - URI: `/api/events/:id/rsvp`
+  - Brief Description: Cancels a user's RSVP for an event
+  - HTTP Method: POST
+  - URI: `/api/events/:id/cancel-rsvp`
   - Query Parameters: None (the event ID is passed as a path parameter)
   - Request Body: None
   - Response Status: 200 OK

@@ -17,7 +17,7 @@ db.events.insertMany([
 
     {
         name: "Neighborhood Potluck",
-        category: ["volunteer", "socials"],
+        category: "socials",
         dateAndTime: new Date("2025-06-10T12:00:00Z"),
         location: "Ithaca Commons Community Center, Ithaca, NY",
         summary: "Neighbors share homemade dishes and connect over food.",
@@ -28,8 +28,7 @@ db.events.insertMany([
 
     {
         name: "Local History Walk",
-        // category: "culturalArts",
-        category: ["culturalArts", "educationalInfo"],
+        category: "culturalArts",
         dateAndTime: new Date("2025-05-20T14:00:00Z"),
         location: "Ithaca Commons, Downtown Ithaca, NY",
         summary: "A guided tour through Ithaca’s rich historical landmarks",
@@ -227,4 +226,4 @@ db.events.insertMany([
 ]);
 
 db.events.find();
-db.events.find({ category: { $in: ["volunteer"] } });
+//db.events.find({ category: { $in: ["volunteer"] } });

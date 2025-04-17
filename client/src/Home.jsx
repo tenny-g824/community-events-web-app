@@ -18,7 +18,7 @@ export default function Home() {
       <div className="flex gap-x-3">
         <Chip
           category="Volunteer & Service"
-          // onClickChip={() => }
+          // onClickChip={() => ("/api/events?category=volunteer")}
         />
 
         <Chip

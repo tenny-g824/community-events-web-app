@@ -9,7 +9,6 @@ I used Generative AI to help me produce the name of my category filters for my e
 1. Volunteer & Service --> volunteer
 
     - Community Clean-Up Day (index 0)
-    - Neighborhood Potluck (index 1)
     - Volunteer Appreciation Day (index 6)
     - Food Bank Drive (index 15)
     - Youth Mentoring Meetup (index 7)
@@ -23,7 +22,6 @@ I used Generative AI to help me produce the name of my category filters for my e
 
 3. Educational & Informative --> educationalInfo
 
-    - Local History Walk
     - Community Garden Workshop
     - Literacy Workshop
     - Senior Tech Day
@@ -362,7 +360,7 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
   - URI: `/api/events/{id}`
   - Query Parameters: None (the event ID is passed as a path parameter)
   - Request Body: None
-  - Response Status: 204 No Content
+  - Response Status: 200 OK
   - Response Body: None
 
 
@@ -370,7 +368,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **RSVP to Event**
 
-  - CRUD Operation: Create (document)
   - HTTP Method: POST
   - URI: `/api/events/{id}/rsvp`
   - Query Parameters: None (data is sent in the request body or not required)
@@ -380,9 +377,8 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Cancel RSVP**
 
-  - CRUD Operation: Delete (document)
-  - HTTP Method: DELETE
-  - URI: `/api/events/{id}/rsvp`
+  - HTTP Method: POST
+  - URI: `/api/events/{id}/cancel-rsvp`
   - Query Parameters: None (the event ID is passed as a path parameter)
   - Request Body: None
   - Response Status: 200 OK
@@ -529,7 +525,7 @@ app.patch('/api/events/:id', async (req, res) => {
 });
 ```
 
-**My Prompt for Deleting an Event:** Write JavaScript code using Express (using a DELETE endpoint) to delete an event from a MongoDB events collection using its ID. If the ID is invalid or the event doesn't exist, return a 404 error. If the event is successfully deleted, return a 204 status code with no content.
+**My Prompt for Deleting an Event:** Write JavaScript code using Express (using a DELETE endpoint) to delete an event from a MongoDB events collection using its ID. If the ID is invalid or the event doesn't exist, return a 404 error. If the event is successfully deleted, return a 200 status code with no content.
 
 Response of Generated Code:
 
@@ -540,7 +536,7 @@ app.delete('/api/events/:id', async (req, res) => {
     const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
 
     if (deleteEvent.deletedCount > 0) {
-      res.status(204).send();
+      res.status(200).send();
     } else {
       res.status(404).send();
     }
@@ -579,12 +575,12 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
 });
 ```
 
-**My Prompt to Cancel RSVP to an Event:** Write JavaScript code using Express (using a DELETE endpoint) to cancel an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, decrease the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a cancellation message. If the event is not found or the ID is invalid, return a 404 error.
+**My Prompt to Cancel RSVP to an Event:** Write JavaScript code using Express (using a POST endpoint) to cancel an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, decrease the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a cancellation message. If the event is not found or the ID is invalid, return a 404 error.
 
 Response of Generated Code:
 
 ```javascript
-app.delete('/api/events/:id/rsvp', async (req, res) => {
+app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
   const id = req.params.id;
 
   if (ObjectId.isValid(id)) {
@@ -598,7 +594,7 @@ app.delete('/api/events/:id/rsvp', async (req, res) => {
     );
 
     if (rsvpCancellation.modifiedCount > 0) {
-      return res.status(204).json({ message: 'Success!' });
+      return res.status(200).json({ message: 'Success!' });
     } else {
       return res.status(404).json({ message: 'RSVP Not Found' });
     }
