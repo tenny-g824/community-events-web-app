@@ -8,6 +8,15 @@
 ###
 # @name events
 GET /api/events
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 12521
+etag: W/"30e9-EOIC/lXIQZ5VWXAu8o4PIEqcD64"
+date: Thu, 17 Apr 2025 01:30:18 GMT
+connection: close
 /*
 ## Get Single Event by ID
 */
@@ -20,14 +29,23 @@ GET /api/events/{{ events[0]._id }}
 */
 ###
 # @name filtered_events
-GET /api/events?category=volunteer
+GET /api/events?category={{"educationalInfo"}}
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 2918
+etag: W/"b66-P3en+F8goW4k9TJO3h/S8YZmdFY"
+date: Thu, 17 Apr 2025 01:39:10 GMT
+connection: close
 /*
 ## Create an Event
 */
 ###
 # @ref events
 # @name create_event
-POST /api/events/
+POST /api/events
 Content-Type: application/json
 
 {
@@ -86,6 +104,15 @@ DELETE /api/events/{{ events[7]._id }}
 # @ref events
 # @name rsvp_event
 POST /api/events/{{ events[15]._id }}/rsvp
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 28
+etag: W/"1c-N4n+DHyWXcJvdXZFkisBdINzX4w"
+date: Thu, 17 Apr 2025 01:36:25 GMT
+connection: close
 /*
 ## Cancel RSVP to an Event 
 */

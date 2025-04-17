@@ -22,10 +22,20 @@ const conn = await client.connect();
 const db = conn.db('app');
 
 /*
-This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection without applying any filters. It uses MongoDB's .find().toArray() method directly to fetch all the documents. A 200 status code is then returned along with the full array of events. It also assumes the database connection `db` has already been properly initialized (which it has).
+This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the resulting array, assuming the database connection `db` is already initialized (which it has).
 */
 app.get('/api/events', async (req, res) => {
-  const events = await db.collection('events').find().toArray()
+  const category = req.query.category;
+  let filter = {};
+
+  if (category) {
+    filter.category = category;
+  }
+
+  const events = await db.collection('events')
+    .find(filter)
+    .toArray();
+
   res.status(200).json(events);
 });
 
@@ -42,28 +52,6 @@ app.get('/api/events/:id', async (req, res) => {
     } else {
       res.status(404).send();
     }
-  } else {
-    res.status(404).send();
-  }
-});
-
-/*
-This GET endpoint from OpenAI ChatGPT correctly filters events based on a 'category' query parameter using MongoDB's .find().toArray(). It creates a search filter from the request data, and applies the category filter only when the query parameter exists to retrieve only matching events. A 200 OK response is returned if events are found, else a 404 status code is returned if no events match the category.
-*/
-app.get('/api/events', async (req, res) => {
-  const eventCategory = req.query.category;
-
-  let filteredEvents = {};
-  if (eventCategory) {
-    filteredEvents.category = eventCategory;
-  }
-
-  const events = await db.collection('events')
-    .find(filteredEvents)
-    .toArray();
-
-  if (events.length > 0) {
-    res.status(200).json(events);
   } else {
     res.status(404).send();
   }
@@ -199,6 +187,7 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
     return res.status(404).send();
   }
 });
+
 
 // --- Change nothing below this line ---
 

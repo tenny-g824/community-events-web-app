@@ -302,6 +302,17 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
   - Response Status: 200 OK
   - Response Body: JSON array of events
 
+- **Get All Events By a Specific Category**
+
+  - CRUD Operation: Read (collection)
+  - HTTP Method: GET
+  - URI: `/api/events`
+  - Query Parameters:
+    - `category`: Filters events by a specific category (e.g. "Volunteer & Service", "Cultural & Arts").
+  - Request Body (example request): GET `/api/events?category=Volunteer%26Service`
+  - Response Status: 200 OK
+  - Response Body: JSON array of events
+
 - **Get Event by ID**
 
   - CRUD Operation: Read (document)
@@ -311,17 +322,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
   - Request Body: None
   - Response Status: 200 OK
   - Response Body: JSON event object
-
-- **Get All Events By a Specific Category**
-
-  - CRUD Operation: Read (collection)
-  - HTTP Method: GET
-  - URI: `/api/events`
-  - Query Parameters:
-    - `category`: Filters events by a specific category (e.g. "Volunteer & Service", "Cultural & Arts").
-  - Request Body (example request): GET /api/events?category=Volunteer%26Service
-  - Response Status: 200 OK
-  - Response Body: JSON array of events
 
 - **Create Event**
 
@@ -387,18 +387,29 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 ### Endpoints: Prompts, Comments, Responses
 
-**My Prompt for Getting all Events:** Write code in JavaScript using Express (using a GET endpoint) to retrieve all events from a MongoDB events collection with no filters. If events are found, return them with a 200 status code.
+**My Prompt for Getting and Filtering Events**:
+Write code in JavaScript using Express to create a GET endpoint that gets events from a MongoDB events collection. If a category query parameter is provided (e.g., /api/events?category={{"volunteer"}}), return only the events matching that category. If no category is provided, return all events.
 
 Response of Generated Code:
 
 ```javascript
 app.get('/api/events', async (req, res) => {
-  const events = await db.collection('events').find().toArray()
+  const eventCategory = req.query.category;
+  let filter = {};
+
+  if (eventCategory) {
+    filter.category = eventCategory;
+  }
+
+  const events = await db.collection('events')
+    .find(filter)
+    .toArray();
+
   res.status(200).json(events);
 });
 ```
 
-**My Prompt for Getting a Single Event:** Write code in JavaScript using Express (using a GET endpoint) to retrieve a single event from a MongoDB events collection using its ID as a route parameter. If the ID is valid and the event is found, return it with a 200 status code. If the ID is invalid or the event is not found, return a 404 error.
+**My Prompt for Getting a Single Event:** Write code in JavaScript using Express to get a single event from a MongoDB events collection using its ID as a route parameter. If the ID is valid and the event is found, return it with a 200 status code. If the ID is invalid or the event is not found, return a 404 error.
 
 Response of Generated Code:
 
@@ -418,32 +429,7 @@ app.get('/api/events/:id', async (req, res) => {
 });
 ```
 
-**My Prompt for Filtering Events by Category:** Write JavaScript code using Express (using a GET endpoint) to get all events from a MongoDB events collection that match a specific category. The category should be passed as a query parameter (e.g., /api/events?category=volunteering). If events that are matching are found, return them with a 200 status code. If no events match, return a 404 error.
-
-Response of Generated Code:
-
-```javascript
-app.get('/api/events', async (req, res) => {
-  const eventCategory = req.query.category;
-
-  let filteredEvents = {};
-  if (eventCategory) {
-    filteredEvents.category = eventCategory;
-  }
-
-  const events = await db.collection('events')
-    .find(filteredEvents)
-    .toArray();
-
-  if (events.length > 0) {
-    res.status(200).json(events);
-  } else {
-    res.status(404).send();
-  }
-});
-```
-
-**My Prompt for Creating an Event:** Write JavaScript code using Express (using a POST endpoint) to create a new event in a MongoDB events collection. The request should include required fields like name and category. If any required field is missing, return a 404 error. If the event is created successfully, return the created event with a 201 status code.
+**My Prompt for Creating an Event:** Write JavaScript code using Express to create a new event in a MongoDB events collection. The request should include required fields like name and category. If any required field is missing, return an error. If the event is created successfully, return the created event with a 201 status code.
 
 Response of Generated Code:
 
@@ -461,7 +447,7 @@ app.post('/api/events', async (req, res) => {
 });
 ```
 
-**My Prompt for Fully Updating (Replacing) an Event:** Write JavaScript code using Express (using a PUT endpoint) to fully replace an existing event in a MongoDB events collection using its ID. The request must have all required fields like name and category. If the event is found and replaced, return the updated event with a 200 status code. If the ID is invalid or the event is not found, return a 404 error. If the request body is missing required fields, return a 404 error.
+**My Prompt for Fully Updating (Replacing) an Event:** Write JavaScript code using Express to fully replace an existing event in a MongoDB events collection using its ID. The request must have all required fields like name and category. If the event is found and replaced, return the updated event with a 200 status code. If the ID is invalid or the event is not found, return a 404 error. If the request body is missing required fields, return a 404 error.
 
 Response of Generated Code:
 
@@ -494,7 +480,7 @@ app.put('/api/events/:id', async (req, res) => {
 });
 ```
 
-**My Prompt for Partially Updating (Modifying) an Event:** Write JavaScript code using Express (using a PATCH endpoint) to partially update an event in a MongoDB events collection using its ID. The request can have one or more fields to update. If there are no fields provided to update, return a 404 error. If the ID is invalid or the event is not found, return a 404 error. If successful, return the updated event with a 200 status code.
+**My Prompt for Partially Updating (Modifying) an Event:** Write JavaScript code using Express to partially update an event in a MongoDB events collection using its ID. The request can have one or more fields to update. If there are no fields provided to update, return a 404 error. If the ID is invalid or the event is not found, return a 404 error. If successful, return the updated event with a 200 status code.
 
 Response of Generated Code:
 
@@ -525,7 +511,7 @@ app.patch('/api/events/:id', async (req, res) => {
 });
 ```
 
-**My Prompt for Deleting an Event:** Write JavaScript code using Express (using a DELETE endpoint) to delete an event from a MongoDB events collection using its ID. If the ID is invalid or the event doesn't exist, return a 404 error. If the event is successfully deleted, return a 200 status code with no content.
+**My Prompt for Deleting an Event:** Write JavaScript code using Express to delete an event from a MongoDB events collection using its ID. If the ID is invalid or the event doesn't exist, return a 404 error. If the event is successfully deleted, return a 200 status code that confirms it.
 
 Response of Generated Code:
 
@@ -536,7 +522,7 @@ app.delete('/api/events/:id', async (req, res) => {
     const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
 
     if (deleteEvent.deletedCount > 0) {
-      res.status(200).send();
+      res.status(200).json({ message: 'Event Deleted'});
     } else {
       res.status(404).send();
     }
@@ -546,7 +532,7 @@ app.delete('/api/events/:id', async (req, res) => {
 });
 ```
 
-**My Prompt to RSVP to an Event:** Write code in JavaScript using Express (using a POST endpoint) to confirm an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, increase the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a confirmation message. If the event is not found or the ID is invalid, return a 404 error.
+**My Prompt to RSVP to an Event:** Write code in JavaScript using Express to confirm an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, increase the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a confirmation message. If the event is not found or the ID is invalid, return a 404 error.
 
 Response of Generated Code:
 
@@ -575,7 +561,7 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
 });
 ```
 
-**My Prompt to Cancel RSVP to an Event:** Write JavaScript code using Express (using a POST endpoint) to cancel an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, decrease the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a cancellation message. If the event is not found or the ID is invalid, return a 404 error.
+**My Prompt to Cancel RSVP to an Event:** Write JavaScript code using Express to cancel an RSVP for a specific event in a MongoDB events collection using its ID. If the ID is valid, decrease the `numberOfAttendees` by 1. If the event is updated successfully, return a 200 status with a cancellation message. If the event is not found or the ID is invalid, return a 404 error.
 
 Response of Generated Code:
 

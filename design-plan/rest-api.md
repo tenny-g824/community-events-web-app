@@ -35,35 +35,9 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
       ]
       ```
 
-- **Get Event by ID**
-
-  - Brief Description: Retrieves details of a specific event by its ID
-  - CRUD Operation: Read (document)
-  - HTTP Method: GET
-  - URI: `/api/events/:id`
-  - Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
-  - Request Body: None
-  - Response Status: 200 OK
-  - Response Body: JSON event object
-
-    Response Body Example:
-
-      ```json
-      {
-        "id": "abc123",
-        "name": "Community Clean-Up Day",
-        "category": "volunteer",
-        "dateAndTime": "2025-05-15T09:00:00Z",
-        "location": "Stewart Park, Ithaca, NY",
-        "summary": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
-        "description": "Join your fellow residents in a collaborative effort to clean and revitalize Stewart Park. This annual event encourages community involvement by promoting environmental stewardship and civic pride. Participants will work in teams to pick up litter, plant flowers, and restore walking trails. Supplies such as gloves and trash bags will be provided. Complimentary refreshments and a community barbecue will follow the clean-up.",
-        "numberOfAttendees": 85,
-        "price": 0.00
-      }
-      ```
-
 - **Get All Events By a Specific Category**
 
+  - Brief Description: Retrieves all the events filtered by a specified category
   - CRUD Operation: Read (collection)
   - HTTP Method: GET
   - URI: `/api/events`
@@ -90,6 +64,33 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
         },
         ...
       ]
+      ```
+
+- **Get Event by ID**
+
+  - Brief Description: Retrieves details of a specific event by its ID
+  - CRUD Operation: Read (document)
+  - HTTP Method: GET
+  - URI: `/api/events/:id`
+  - Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
+  - Request Body: None
+  - Response Status: 200 OK
+  - Response Body: JSON event object
+
+    Response Body Example:
+
+      ```json
+      {
+        "id": "abc123",
+        "name": "Community Clean-Up Day",
+        "category": "volunteer",
+        "dateAndTime": "2025-05-15T09:00:00Z",
+        "location": "Stewart Park, Ithaca, NY",
+        "summary": "Volunteer with Ithaca Residents to clean and revitalize the local park.",
+        "description": "Join your fellow residents in a collaborative effort to clean and revitalize Stewart Park. This annual event encourages community involvement by promoting environmental stewardship and civic pride. Participants will work in teams to pick up litter, plant flowers, and restore walking trails. Supplies such as gloves and trash bags will be provided. Complimentary refreshments and a community barbecue will follow the clean-up.",
+        "numberOfAttendees": 85,
+        "price": 0.00
+      }
       ```
 
 - **Create Event**
@@ -244,7 +245,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
       ```json
       {
         "message": "RSVP Confirmed",
-        "eventId": "bc90g7654",
       }
       ```
 
