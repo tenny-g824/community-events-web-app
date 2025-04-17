@@ -22,7 +22,7 @@ const conn = await client.connect();
 const db = conn.db('app');
 
 /*
-This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the resulting array, assuming the database connection `db` is already initialized (which it has).
+This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the events array, assuming the database connection `db` is already initialized (which it has).
 */
 app.get('/api/events', async (req, res) => {
   const category = req.query.category;

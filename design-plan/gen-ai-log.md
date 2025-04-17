@@ -294,7 +294,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Get All Events**
 
-  - CRUD Operation: Read (collection)
   - HTTP Method: GET
   - URI: `/api/events`
   - Query Parameters: None
@@ -304,7 +303,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Get All Events By a Specific Category**
 
-  - CRUD Operation: Read (collection)
   - HTTP Method: GET
   - URI: `/api/events`
   - Query Parameters:
@@ -315,7 +313,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Get Event by ID**
 
-  - CRUD Operation: Read (document)
   - HTTP Method: GET
   - URI: `/api/events/{id}`
   - Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
@@ -325,7 +322,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Create Event**
 
-  - CRUD Operation: Create (document)
   - HTTP Method: POST
   - URI: `/api/events`
   - Query Parameter: None (data is sent in the request body, not as query parameters)
@@ -335,7 +331,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Update (replace) Event**
 
-  - CRUD Operation: Update (replace doc)
   - HTTP Method: PUT
   - URI: `/api/events/{id}`
   - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
@@ -345,7 +340,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Update (modify) Event**
 
-  - CRUD Operation: Update (modify doc)
   - HTTP Method: PATCH
   - URI: `/api/events/{id}`
   - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
@@ -355,7 +349,6 @@ My prompt to ChatGPT was: Design a RESTful API to access a collection of communi
 
 - **Delete Event**
 
-  - CRUD Operation: Delete (document)
   - HTTP Method: DELETE
   - URI: `/api/events/{id}`
   - Query Parameters: None (the event ID is passed as a path parameter)

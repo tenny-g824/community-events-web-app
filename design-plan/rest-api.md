@@ -1,6 +1,6 @@
 # Documenting my Evaluation and API Design
 
-The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, request bodies, response statuses, and response bodies for both the Event and RSVP endpoints. These are correct because the AI's design used GET for retrieving data, POST for creating resources, PUT for updating them, and DELETE for removal according to the documentation for CRUD operations. It also used a plural noun ("events") as its collection following a logical URI structure ('/api/events') and used path parameters for accessing specific items, which is consistent with best REST practices taught in lectures. However, it used the wrong URI syntax ('/api/events/{id}') and an incorrect filter format ('/api/events?category=Volunteer%26Service'), which I corrected to '/api/events/:id' and '/api/events?category={{"volunteer"}}' to match common RESTful practices and class coding exercises. Additionally, the AI did not provide examples of the request and response bodies, so I added clear `json` examples to improve the clarity of the API and demonstrate what is expected to be received and returned. My revisions makes sure that the API is both accurate and easier to understand.
+The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, request bodies, response statuses, and response bodies for both the Event and RSVP endpoints. These are correct because the AI's design used GET for retrieving data, POST for creating resources, PUT for updating them, and DELETE for removal according to the documentation for CRUD operations. It also used a plural noun ("events") as its collection following a logical URI structure ('/api/events') and used path parameters for accessing specific items, which is consistent with best REST practices taught in lectures. However, it used the wrong URI syntax ('/api/events/{id}') and an incorrect filter format ('/api/events?category=Volunteer%26Service'), which I corrected to '/api/events/:id' and '/api/events?category={{"volunteer"}}' to match common RESTful practices and class coding exercises. Additionally, the AI did not provide examples of the request and response bodies, so I added clear `json` examples as well the brief descriptions of each endpoint to improve the clarity of the API and demonstrate what is expected to be received and returned. My few changes makes sure that the API is more accurate and easier to understand.
 
 
 ## Event Endpoints
@@ -8,7 +8,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Get All Events**
 
   - Brief Description: Retrieves a list of all events.
-  - CRUD Operation: Read (collection)
   - HTTP Method: GET
   - URI: `/api/events`
   - Query Parameters: None
@@ -38,7 +37,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Get All Events By a Specific Category**
 
   - Brief Description: Retrieves all the events filtered by a specified category
-  - CRUD Operation: Read (collection)
   - HTTP Method: GET
   - URI: `/api/events`
   - Query Parameters:
@@ -69,7 +67,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Get Event by ID**
 
   - Brief Description: Retrieves details of a specific event by its ID
-  - CRUD Operation: Read (document)
   - HTTP Method: GET
   - URI: `/api/events/:id`
   - Query Parameters: None (the event ID is passed as a path parameter, not a query parameter)
@@ -96,7 +93,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Create Event**
 
   - Brief Description: Creates a new event with the provided details
-  - CRUD Operation: Create (document)
   - HTTP Method: POST
   - URI: `/api/events`
   - Query Parameter: None (data is sent in the request body, not as query parameters)
@@ -139,7 +135,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Update (replace) Event**
 
   - Brief Description: Updates the details of an existing event by its ID
-  - CRUD Operation: Update (replace doc)
   - HTTP Method: PUT
   - URI: `/api/events/:id`
   - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
@@ -182,7 +177,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Update (modify) Event**
 
   - Brief Description: Updates specific fields of an existing event without replacing the entire document.
-  - CRUD Operation: Update (modify doc)
   - HTTP Method: PATCH
   - URI: `/api/events/:id`
   - Query Parameters: None (data is sent in the request body, and the event ID is passed as a path parameter)
@@ -219,7 +213,6 @@ The AI's (ChatGPT) design correctly included the correct HTTP methods, URIs, req
 - **Delete Event**
 
   - Brief Description: Deletes or Removes an event by its ID
-  - CRUD Operation: Delete (document)
   - HTTP Method: DELETE
   - URI: `/api/events/:id`
   - Query Parameters: None (the event ID is passed as a path parameter)
