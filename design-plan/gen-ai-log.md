@@ -387,11 +387,11 @@ Response of Generated Code:
 
 ```javascript
 app.get('/api/events', async (req, res) => {
-  const eventCategory = req.query.category;
+  const category = req.query.category;
   let filter = {};
 
-  if (eventCategory) {
-    filter.category = eventCategory;
+  if (category) {
+    filter.category = category;
   }
 
   const events = await db.collection('events')
