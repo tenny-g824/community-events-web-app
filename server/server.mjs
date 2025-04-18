@@ -125,7 +125,7 @@ app.patch('/api/events/:id', async (req, res) => {
 });
 
 /*
-This DELETE endpoint from OpenAI ChatGPT correctly removes an event based on its Mongo ObjectId. It makes sure that the ID is valid and a matching document exists before attempting deletion with MongoDB's deleteOne(). A 200 status is returned if deletion is successful. Else, a 404 status code is returned if the event does not exist or has already been removed.
+This DELETE endpoint from OpenAI ChatGPT correctly removes an event based on its Mongo ObjectId. It makes sure that the ID is valid and a matching document exists before attempting deletion with MongoDB's deleteOne(). However, Gen AI sends a message which I changed to sending a complete JSON object. A 200 status is returned if deletion is successful, else a 404 status code is returned if the event does not exist or has already been removed.
 */
 app.delete('/api/events/:id', async (req, res) => {
   const id = req.params.id;
@@ -133,7 +133,7 @@ app.delete('/api/events/:id', async (req, res) => {
     const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
 
     if (deleteEvent.deletedCount > 0) {
-      res.status(200).json({ message: 'Event Removed Successfully'});
+      res.status(200).send();
     } else {
       res.status(404).send();
     }
@@ -143,7 +143,7 @@ app.delete('/api/events/:id', async (req, res) => {
 });
 
 /*
-This POST endpoint from OpenAI ChatGPT correctly confirms an RSVP by incrementing the numberOfAttendees by 1 for a valid event ID, triggering an RSVP action. However, Gen AI uses $addToSet to add req.body.userId to the rsvps array which is unnecessary, as the requirements of the code only focuses on updating the total count, not individual RSVPs. The $inc operator in updateOne() is correctly used to increase the count, and the event ID is validated before checking if the update actually modified any document. A 200 status code is returned if the RSVP confirmation is successful, else a 404 status code is sent.
+This POST endpoint from OpenAI ChatGPT correctly confirms an RSVP by incrementing the numberOfAttendees by 1 for a valid event ID, triggering an RSVP action. However, Gen AI sends a message which I changed to sending a complete JSON object; Gen AI also uses $addToSet to add req.body.userId to the rsvps array which is unnecessary, as the requirements of the code only focuses on updating the total count, not individual RSVPs. The $inc operator in updateOne() is correctly used to increase the count, and the event ID is validated before checking if the update actually modified any document. A 200 status code is returned if the RSVP confirmation is successful, else a 404 status code is sent.
 */
 app.post('/api/events/:id/rsvp', async (req, res) => {
   const id = req.params.id;
@@ -156,9 +156,9 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
     );
 
     if (rsvpConfirmation.modifiedCount > 0) {
-      res.status(200).json({ message: 'RSVP Confirmed' });
+      res.status(200).send();
     } else {
-      res.status(404).json({ message: 'Failed to confirm RSVP' });
+      res.status(404).send();
     }
   } else {
     res.status(404).send();
@@ -166,7 +166,7 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
 });
 
 /*
-This POST endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 200 status code on success with a message or a 404 with a message on failure.
+This POST endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by decrementing the numberOfAttendees by 1 when given a valid event ID. However, Gen AI sends a message which I changed to sending a complete JSON object; Gen AI also checks and removes the specified userId from the rsvps array if it exists which is unnecessary as the assignment only requires updating the numberOfAttendees count. The code uses the $inc operator in updateOne() with `$inc: -1` to update the count, validates the ObjectId, and checks modifiedCount to return a 200 status code on success with a message or a 404 with a message on failure.
 */
 app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
   const id = req.params.id;
@@ -179,9 +179,9 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
     );
 
     if (rsvpCancellation.modifiedCount > 0) {
-      return res.status(200).json({ message: 'RSVP Successfully Canceled' });
+      return res.status(200).send();
     } else {
-      return res.status(404).json({ message: 'RSVP Not Found or Already Canceled' });
+      return res.status(404).send();
     }
   } else {
     return res.status(404).send();

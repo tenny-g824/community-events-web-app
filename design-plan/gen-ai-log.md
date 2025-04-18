@@ -515,7 +515,7 @@ app.delete('/api/events/:id', async (req, res) => {
     const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
 
     if (deleteEvent.deletedCount > 0) {
-      res.status(200).json({ message: 'Event Deleted'});
+      res.status(200).json({ message: 'Event Removed Successfully'});
     } else {
       res.status(404).send();
     }
@@ -544,9 +544,9 @@ app.post('/api/events/:id/rsvp', async (req, res) => {
     );
 
     if (rsvpConfirmation.modifiedCount > 0) {
-      res.status(200).json({ message: 'Confirmed!' });
+      res.status(200).json({ message: 'RSVP Confirmed' });
     } else {
-      res.status(404).json({ message: 'Cannot Confirm RSVP' });
+      res.status(404).json({ message: 'Failed to Confirm RSVP' });
     }
   } else {
     res.status(404).send();
@@ -573,9 +573,9 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
     );
 
     if (rsvpCancellation.modifiedCount > 0) {
-      return res.status(200).json({ message: 'Success!' });
+      return res.status(200).json({ message: 'RSVP Successfully Canceled' });
     } else {
-      return res.status(404).json({ message: 'RSVP Not Found' });
+      return res.status(404).json({ message: 'RSVP Not Found or Previously Canceled' });
     }
   } else {
     return res.status(404).send();
