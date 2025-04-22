@@ -1,64 +1,145 @@
-import SearchEvent from './components/SearchEvent';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import SearchEvents from './components/SearchEvents';
 import Chip from './components/Chip';
 import EventCard from './components/EventCard';
+import EventModal from './components/EventModal';
+import LoadingCard from './components/LoadingCard';
+import ErrorAlert from './components/ErrorAlert';
 
 export default function Home() {
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(undefined);
+  const [chosenEvent, setChosenEvent] = useState(undefined);
+  const [currentFilter, setCurrentFilter] = useState(undefined);
+
+  function getEventData() {
+    setIsLoading(true);
+    setHasError(undefined);
+
+    axios.get('/api/events', {
+      params: currentFilter ? { category: currentFilter } : undefined,
+    })
+      .then((response) => {
+        console.log("Category", currentFilter); // Debugging
+        setEvents(response.data);
+      })
+      .catch((err) => {
+        setHasError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  };
+
+  useEffect(() => {
+    // request event JSON data from the server
+    getEventData(currentFilter);
+    console.log("Get Events with Current Filter", currentFilter); // Debugging
+  }, [currentFilter]);
+
+  // useEffect(() => {
+  //   const getEventData = (category) => {
+  //     console.log("Current Filter before API call:", currentFilter);
+  //     setIsLoading(true);
+  //     setHasError(null);
+
+  //     axios.get('/api/events', {
+  //       params: category ? { category } : undefined,
+  //     })
+  //       .then((response) => {
+  //         console.log("API Response:", response.data); // Debugging; delete this
+  //         setEvents(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.error("API Error:", err); // Debugging; delete this
+  //         setHasError(err);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       })
+  //   };
+
+  //   getEventData(currentFilter);
+  //   console.log("Current Filter", currentFilter);
+  // }, [currentFilter]);
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <div /* className="bg-green-600" */>
-        <h1 className="text-4xl font-bold mb-8 pl-8 text-slate-800">Ithaca Community Engagement Events</h1>
-
-        <SearchEvent />
-      </div>
-
-      <div className="my-14"></div>
-
-      {/* <div className="flex justify-center gap-x-3"> */}
-      <div className="flex gap-x-3">
-        <Chip
-          category="Volunteer & Service"
-          // onClickChip={() => ('/api/events?category={{"volunteer"}}')}
+    <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-sky-100 p-8">
+      {hasError ? (
+        <ErrorAlert
+          message={"Error loading events. Please check internet connection and refresh the page to try again"}
+          onRetry={() => {
+            getEventData(); // After the Error Alert, Retry fetching the event data
+          }}
         />
+      ) : (
+        <>
+          <div className="bg-white/80 rounded-lg shadow-md p-8 mb-10 border border-gray-300">
+            <h1 className="text-5xl font-extrabold text-left text-green-700 mb-10 tracking-tight drop-shadow-md">
+              Ithaca Community Engagement Events
+            </h1>
 
-        <Chip
-          category="Cultural & Arts"
-          // onClickChip={}
-          // onClickChip={() => {
-          //   console.log("Cultural & Arts")}
-          // }
-        />
+            <SearchEvents />
+          </div>
 
-        <Chip
-          category="Educational & Informative"
-          // onClickChip={() => {
-          //   console.log("Educational and Informative")}
-          // }
-        />
+          <div className="my-12"></div>
 
-        <Chip
-          category="Social & Networking"
-          // onClickChip={() => {
-          //   console.log("Social & Networking")}
-          // }
-        />
+          <div className="flex gap-x-3">
+            {[
+              { label: "Volunteer & Service", value: "volunteer" },
+              { label: "Cultural & Arts", value: "culturalArts" },
+              { label: "Educational & Informative", value: "educationalInfo" },
+              { label: "Social & Networking", value: "socials" },
+              { label: "Health & Recreation", value: "healthRecreation" },
+            ].map(({ label, value }) => (
+              <Chip
+                key={value}
+                category={label}
+                isActive={currentFilter === value}
+                onClickChip={() => {
+                  // If the filter is already selected and the user clicks it again, remove the filter. Otherwise, apply the filter.
+                  const newFilter = currentFilter === value ? undefined : value;
+                  console.log("Selected Filter:", newFilter); // Debugging
+                  setCurrentFilter(newFilter);
+                }}
+              />
+            ))}
+          </div>
 
-        <Chip
-          category="Health & Recreation"
-          // onClickChip={() => {
-          //   console.log("Health & Recreation")}
-          // }
-        />
-      </div>
+          <div className="my-6"></div>
 
-      <div className="my-2"></div>
+          {isLoading && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <LoadingCard />
+              <LoadingCard />
+              <LoadingCard />
+            </div>
+          )}
 
-      <div className="flex space-x-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <EventCard />
-        <EventCard />
-        <EventCard />
-      </div>
+          {!isLoading && !hasError && (
+            <div className="flex space-x-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {events.map((event) => (
+                <EventCard
+                  key={event._id}
+                  name={event.name}
+                  imageUri={event.imageUri}
+                  dateAndTime={event.dateAndTime}
+                  location={event.location}
+                  summary={event.summary}
+                  onClick={() => setChosenEvent(event)}
+                />
+              ))}
+            </div>
+          )}
 
+          <EventModal
+            event={chosenEvent}
+            onModalClose={() => setChosenEvent(undefined)}
+          />
+        </>
+      )}
     </div>
   );
 }

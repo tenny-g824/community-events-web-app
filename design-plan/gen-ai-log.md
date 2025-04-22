@@ -31,7 +31,7 @@ I used Generative AI to help me produce the name of my category filters for my e
 4. Social & Networking --> socials
 
     - Local Business Fair
-    - Neighborhood Block Party
+    - Neighborhood Block Party (index 1)
     - Neighborhood Potluck
     - Cornell Winter Charity Gala
 

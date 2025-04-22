@@ -15,6 +15,14 @@ app.use((req, res, next) => {
 
 // --- Change nothing above this line ---
 
+// Delay every request by a few seconds
+app.use((req, res, next) => {
+  // Random delay between 0 and 3 seconds
+  const delay = Math.floor(Math.random() * 4) * 1000;
+  setTimeout(() => {
+    next();
+  }, delay);
+});
 
 // Connect to MongoDB
 const client = new MongoClient('mongodb://localhost:27017');
@@ -25,11 +33,17 @@ const db = conn.db('app');
 This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the events array, assuming the database connection `db` is already initialized (which it has).
 */
 app.get('/api/events', async (req, res) => {
+  // Simulate an error for testing and comment out error after tested the failure user experience
+  // throw new Error("test error")
+
   const category = req.query.category;
+  // const search = req.query.search;
+
   let filter = {};
 
   if (category) {
     filter.category = category;
+    // filter.category = { $in: [category] }; --> for an event being in an array of categories; an event listed in multiple categories
   }
 
   const events = await db.collection('events')
