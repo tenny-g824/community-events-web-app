@@ -7,26 +7,34 @@ export default function EventModal({ event, onModalClose }) {
 
     return (
         <div className="flex flex-col fixed inset-0 bg-slate bg-opacity-40 backdrop-blur-md p-6 items-center justify-center">
-            <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full relative">
-                <div className="absolute top-0 right-2 text-gray-800 px-75 py-6 w-40 h-40 text-5xl">
-                    <button aria-label="close"
-                        onClick={onModalClose}
-                        className="cursor-pointer absolute top-0 right-0 text-gray-800 text-5xl"
-                    >
-                        &times;
-                    </button>
+            <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full min-h-[700px] relative">
+                <button aria-label="close"
+                    onClick={onModalClose}
+                    className="cursor-pointer absolute top-4 right-3 w-10 h-10"
+                >
+                    <img
+                        // Source: https://www.flaticon.com/free-icon/delete_11425359?term=x-icon&page=1&position=86&origin=search&related_id=11425359
+                        src="/x-grey-icon.png"
+                        alt="Close"
+                        // className="w-full h-full object-contain hover:opacity-80 transition duration-200"
+                    />
+                </button>
+
+                <div className="w-full h-[320px]">
+                    <img
+                        src={event.imageUri}
+                        alt={event.name}
+                        className="w-full h-100 object-cover rounded-t-xl"
+                    />
                 </div>
-                <img
-                    src={event.imageUri}
-                    alt={event.name}
-                    className="w-full h-74 object-cover rounded-t-xl"
-                />
-                <div className="p-8">
-                    <h2 className="text-3xl font-bold mb-6"> {event.name}</h2>
-                    <p className="mb-4 text-slate-900"><strong> {event.description}</strong></p>
-                    <div className="space-y-3 text-slate-900">
+
+                <div className="p-8 mt-20 text-slate-900">
+                    <h2 className="text-3xl font-bold mb-4">{event.name}</h2>
+                    <p className="mb-6 font-medium">{event.description}</p>
+
+                    <div className="space-y-2">
                         <p>
-                            <strong>Date:</strong>{' '} {/* space before writing the time */}
+                            <strong>Date:</strong>{' '}
                             {new Date(event.dateAndTime).toLocaleDateString('en-US', {
                                 month: 'long',
                                 day: 'numeric',
@@ -34,11 +42,11 @@ export default function EventModal({ event, onModalClose }) {
                             })}
                         </p>
                         <p>
-                            <strong>Time:</strong>{' '} {/* space before writing the time */}
+                            <strong>Time:</strong>{' '}
                             {new Date(event.dateAndTime).toLocaleTimeString([], {
                                 hour: 'numeric',
                                 minute: '2-digit',
-                                hour12: true
+                                hour12: true,
                             })}
                         </p>
                         <p><strong>Location:</strong> {event.location}</p>

@@ -5,6 +5,7 @@ export default function SearchEvents() {
         <div className="mb-4 flex justify-center">
             <div className="relative w-4/5">
                 <img
+                    // cite this: https://www.flaticon.com/free-icon/loupe_751381?term=search&page=1&position=32&origin=tag&related_id=751381
                     src="/search-icon.png"
                     alt="Search"
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 w-7 h-7"
@@ -55,4 +56,3 @@ export default function SearchEvents() {
 //         </div>
 //     );
 // }
-

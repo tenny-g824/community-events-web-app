@@ -13,7 +13,7 @@ db.events.insertMany([
         dateAndTime: new Date("2025-05-15T13:00:00Z"), // 9:00 AM EST
         location: "Stewart Park, 1 James L Gibbs Dr.",
         summary: "Volunteer with Ithaca Residents to clean and revitalize the local park.",
-        description: "Join your fellow residents in a collaborative effort to clean and revitalize Stewart Park. This annual event encourages community involvement by promoting environmental stewardship and civic pride. Participants will work in teams to pick up litter, plant flowers, and restore walking trails. Supplies such as gloves and trash bags will be provided. Complimentary refreshments and a community barbecue will follow the clean-up.",
+        description: "Join your fellow residents to clean and revitalize Stewart Park. Participants will team up to pick up litter, plant flowers, and restore walking trails—with supplies like gloves and trash bags provided. After the clean-up, enjoy complimentary refreshments and a community barbecue to celebrate everyone’s hard work.",
         numberOfAttendees: 85,
         price: 0.00
     },
@@ -25,9 +25,9 @@ db.events.insertMany([
         category: "socials",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-01-10T16:00:00Z"), // 12:00 PM EST
-        location: "Ithaca Commons Community Center",
-        summary: "Neighbors share homemade dishes and connect over food.",
-        description: "Bring your favorite dish and join us for a heartwarming potluck where neighbors gather to share homemade food, laughter, and stories. This event fosters community bonding, allowing residents to connect over diverse cuisines. Enjoy live acoustic music and kid-friendly activities throughout the day. Prizes will be awarded for the most creative dish.",
+        location: "Ithaca Commons Recreation Center",
+        summary: "Neighbors share homemade dishes and connect over food on a cool day.",
+        description: "Bring your favorite dish and join us for a heartwarming potluck where neighbors gather to share homemade food, laughter, and stories. This event fosters community bonding, allowing residents to connect over diverse cuisines. Enjoy live acoustic music. Prizes will be awarded for the most creative dish.",
         numberOfAttendees: 46,
         price: 0.00
     },
@@ -40,8 +40,8 @@ db.events.insertMany([
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-05-20T18:00:00Z"), // 2:00 PM EST
         location: "Ithaca Commons, Downtown Ithaca",
-        summary: "A guided tour through Ithaca’s rich historical landmarks.",
-        description: "Bring your favorite dish and join us for a heartwarming potluck where neighbors gather to share homemade food, laughter, and stories. This event fosters community bonding, allowing residents to connect over diverse cuisines. Enjoy live acoustic music and kid-friendly activities throughout the day. Prizes will be awarded for the most creative dish.",
+        summary: "A guided tour through Ithaca’s rich historical landmarks that shaped this town.",
+        description: "Step back in time with a Local History Walk through Ithaca’s most iconic landmarks. This guided tour offers fascinating stories into the city’s rich past and cultural evolution. Perfect for history buffs and curious minds alike. Lace up your shoes and join your neighbors to appreciate Ithaca's heritage!",
         numberOfAttendees: 37,
         price: 0.00
     },
@@ -54,7 +54,7 @@ db.events.insertMany([
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-07-05T14:00:00Z"), // 10:00 AM EST
         location: "Cornell Botanic Gardens",
-        summary: "Learn sustainable gardening practices and urban farming techniques",
+        summary: "Learn sustainable gardening practices and urban farming techniques.",
         description: "Learn the art of sustainable gardening at this hands-on workshop. Topics include composting, soil health, urban farming techniques, and how to grow your own food. Participants will leave with free seed packets and practical tips for maintaining a home garden. No prior experience required.",
         numberOfAttendees: 43,
         price: 10.00
@@ -62,7 +62,7 @@ db.events.insertMany([
 
     {
         name: "Art in the Park",
-        imageUri: "/art-in-the-park-visuals.jpg", // change this
+        imageUri: "/art-in-the-park-ppl-img.jpg", // change this
         // https://www.visitputinbay.org/event/art-in-the-park/   OR
         // https://www.bouldercity.com/event/art-in-the-park-2024/
         category: "culturalArts",
@@ -154,7 +154,7 @@ db.events.insertMany([
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-08-20T17:00:00Z"), // 1:00 PM EST
         location: "Ithaca Commons, Downtown Ithaca",
-        summary: "A celebration of diverse cultures through food, music, and art.",
+        summary: "A celebration of diverse cultures through food, music, and the best of art.",
         description: "A celebration of diverse cultures through food, music, and art. Celebrate diversity through a vibrant display of food, music, and art from around the world. Taste dishes from different cultures, enjoy live performances, and participate in cultural workshops. Fun activities for kids will be available.",
         numberOfAttendees: 84,
         price: 0.00
@@ -183,7 +183,7 @@ db.events.insertMany([
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-03-30T19:00:00Z"), // 3:00 PM EST
         location: "Ithaca Public Library",
-        summary: "A workshop aimed at improving literacy skills for all age groups.",
+        summary: "A workshop aimed at offering practical tools to improve literacy skills for all age groups.",
         description: "Join us for an interactive literacy workshop aimed at enhancing reading and writing skills. Sessions are available for all age groups with fun, engaging activities. Free books and resources will be provided to participants.",
         numberOfAttendees: 22,
         price: 0.00
@@ -199,7 +199,7 @@ db.events.insertMany([
         dateAndTime: new Date("2025-12-18T23:00:00Z"), // 7:00 PM EST
         location: "Hangar Theatre",
         summary: "A performance by local actors showcasing original community-driven plays.",
-        description: "Experience the magic of live theater with performances by talented local actors showcasing original, community-driven plays. The event aims to highlight the voices and stories of Ithaca residents, bringing humor, drama, and heartfelt moments to the stage. Stick around after the show for a meet-and-greet with the cast and crew. Snacks and beverages will be available for purchase.",
+        description: "Experience the magic of live theater with performances by talented local actors showcasing original, community-driven plays. The event aims to highlight the voices and stories of Ithaca residents, bringing humor, drama, and heartfelt moments to the stage. Snacks and beverages will be available for purchase.",
         numberOfAttendees: 58,
         price: 12.00
     },
@@ -212,8 +212,8 @@ db.events.insertMany([
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-06-29T20:00:00Z"), // 4:00 PM EST
         location: "Ithaca Commons, Downtown Ithaca",
-        summary: "A festive block party fostering community bonding and fun.",
-        description: "Experience the magic of live theater with performances by talented local actors showcasing original, community-driven plays. The event aims to highlight the voices and stories of Ithaca residents, bringing humor, drama, and heartfelt moments to the stage. Stick around after the show for a meet-and-greet with the cast and crew. Snacks and beverages will be available for purchase.",
+        summary: "A festive block party fostering community bonding, local vendors, and fun outdoors.",
+        description: "Join us for a lively Neighborhood Block Party filled with music, games, and great company! Connect with fellow community members and enjoy local food and entertainment. Whether you're new to the neighborhood or a longtime resident, there's something for everyone. Don't miss out on the spirit of community right on your block!",
         numberOfAttendees: 34,
         price: 0.00
     },
@@ -221,26 +221,26 @@ db.events.insertMany([
     {
         name: "Food Bank Drive",
         imageUri: "/food-bank-drive.jpg", // change this
-        // https://www.istockphoto.com/vector/food-drive-charity-movement-gm897019868-247623301
+        // https://wingsmuseum.org/events/food-drive/
         category: "volunteer",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-08-13T13:00:00Z"), // 9:00 AM EST
         location: "Ithaca Food Bank",
-        summary: "A drive to collect food donations for local residents in need.",
-        description: "Help fight hunger by participating in our annual Food Bank Drive. We are collecting non-perishable food items to support local families in need. Community members are encouraged to drop off donations and stay for refreshments and live music. Volunteers will be on-site to help sort and distribute items. Every contribution makes a difference!",
+        summary: "A drive to collect food donations and fight hunger for local residents in need.",
+        description: "Help fight hunger by participating in our annual Food Bank Drive. We are collecting non-perishable food items to support local families in need. Community members are encouraged to drop off donations and stay for refreshments and live music. Volunteers will be on-site to help sort and distribute items. Make a difference!",
         numberOfAttendees: 75,
         price: 0.00
     },
 
     {
         name: "Blood Donation Camp",
-        imageUri: "/blood-donation-camp.png", // change this
-        // https://www.santgadgemaharajshikshasamiti.org/event/blood-donation-camp/
+        imageUri: "/blood-donation-camp.jpg", // change this
+        // https://batonrougeclinic.com/news-education/10-reasons-to-donate-blood/
         category: "healthRecreation",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-09-20T12:00:00Z"), // 8:00 AM EST
-        location: "Ithaca Community Center",
-        summary: "A free blood donation event to support local hospitals.",
+        location: "Ithaca Commons Community Center",
+        summary: "A free blood donation event to support local hospitals and provide free check-ups.",
         description: "Join us in saving lives by donating blood at our community blood donation camp. Medical professionals will ensure a safe and comfortable experience for all donors. Donors will receive a free wellness check-up and refreshments. Walk-ins are welcome, but appointments are encouraged to minimize wait times.",
         numberOfAttendees: 50,
         price: 0.00
@@ -248,14 +248,14 @@ db.events.insertMany([
 
     {
         name: "Community Sports Day",
-        imageUri: "/community-sports-day.jpgg", // change this
+        imageUri: "/community-sports-day.jpg", // change this
         // https://excelactivitygroup.co.uk/old-school-sports-day/
         category: "healthRecreation",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-11-15T14:00:00Z"), // 10:00 AM EST
-        location: "Ithaca Recreation Center",
-        summary: "A day filled with sports and recreational activities for all ages.",
-        description: "Get ready for a fun-filled day of sports and recreational activities suitable for all ages. Participate in basketball, soccer, volleyball, and relay races. Professional coaches will offer mini-training sessions, and there will be prizes for competition winners. Healthy snacks and hydration stations will be provided. Come with friends and family for a day of fitness and fun!",
+        location: "Greater Ithaca Activities Center (GIAC)",
+        summary: "A day filled with sports, never-ending fun, and recreational activities for all ages.",
+        description: "Get ready for a fun-filled day of sports and recreational activities suitable for all ages. Participate in basketball, soccer, volleyball, and relay races. Professional coaches will offer mini-training sessions, and there will be prizes for competition winners. Healthy snacks and hydration stations will be provided!",
         numberOfAttendees: 120,
         price: 0.00
     },
@@ -270,7 +270,7 @@ db.events.insertMany([
         dateAndTime: new Date("2025-11-01T22:00:00Z"), // 6:00 PM EST
         location: "Tompkins County Courthouse",
         summary: "An open forum for residents to discuss local issues and future plans.",
-        description: "Join the conversation at our quarterly Town Hall Meeting, where residents can discuss local issues, upcoming projects, and community initiatives. This is your opportunity to voice concerns, ask questions, and engage with local leaders. Refreshments will be available. All community members are encouraged to attend and participate.",
+        description: "Join the conversation at our quarterly Town Hall Meeting, where residents can discuss local issues, upcoming projects, and community initiatives. This is your opportunity to voice concerns, ask questions, and engage with local leaders. Refreshments will be available. All community members are encouraged to attend.",
         numberOfAttendees: 60,
         price: 0.00
     },
