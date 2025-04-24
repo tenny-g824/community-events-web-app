@@ -22,7 +22,6 @@ export default function Home() {
       params: currentFilter ? { category: currentFilter } : undefined,
     })
       .then((response) => {
-        console.log("Category", currentFilter); // Debugging
         setEvents(response.data);
       })
       .catch((err) => {
@@ -38,32 +37,6 @@ export default function Home() {
     getEventData(currentFilter);
     console.log("Get Events with Current Filter", currentFilter); // Debugging
   }, [currentFilter]);
-
-  // useEffect(() => {
-  //   const getEventData = (category) => {
-  //     console.log("Current Filter before API call:", currentFilter);
-  //     setIsLoading(true);
-  //     setHasError(null);
-
-  //     axios.get('/api/events', {
-  //       params: category ? { category } : undefined,
-  //     })
-  //       .then((response) => {
-  //         console.log("API Response:", response.data); // Debugging; delete this
-  //         setEvents(response.data);
-  //       })
-  //       .catch((err) => {
-  //         console.error("API Error:", err); // Debugging; delete this
-  //         setHasError(err);
-  //       })
-  //       .finally(() => {
-  //         setIsLoading(false);
-  //       })
-  //   };
-
-  //   getEventData(currentFilter);
-  //   console.log("Current Filter", currentFilter);
-  // }, [currentFilter]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-sky-100 p-8">
@@ -128,6 +101,8 @@ export default function Home() {
                   dateAndTime={event.dateAndTime}
                   location={event.location}
                   summary={event.summary}
+                  sourceName={event.sourceName}
+                  sourceUrl={event.sourceUrl}
                   onClick={() => setChosenEvent(event)}
                 />
               ))}
@@ -143,3 +118,70 @@ export default function Home() {
     </div>
   );
 }
+
+
+// inside <EventCard /> in Home.jsx
+// isAttending={event.isAttending} // Pass the current RSVP state and show the intended button on front-end
+// onToggleRsvp={() => toggleRsvp(event._id, event.isAttending)} // Function for RSVP toggle when the button is clicked
+
+// function toggleRsvp(eventId, isAttending) {
+  //   const request = isAttending
+  //     ? axios.post(`/api/events/${eventId}/cancel-rsvp`) // Cancel RSVP if already attending
+  //     : axios.post(`/api/events/${eventId}/rsvp`); // RSVP if not attending
+
+  //   request
+  //     .then(() => {
+  //       console.log(
+  //         `${isAttending ? "Canceled RSVP" : "RSVP'd"} for event with ID: ${eventId}`
+  //       ); // Debugging; delete this
+  //       // Update the `events` state directly without using the spread operator
+  //       setEvents((prevEvents) =>
+  //         prevEvents.map((event) =>
+  //           event._id === eventId
+  //             ? {
+  //                 ...event,
+  //                 isAttending: !isAttending,
+  //                 // numberOfAttendees: isAttending
+  //                 //   ? event.numberOfAttendees - 1 // decrement
+  //                 //   : event.numberOfAttendees + 1, // increment
+  //               } // toggle the RSVP state
+  //             : event // Return the event
+  //         )
+  //       );
+  //       // getEventData(); // Refreshing the events after toggling RSVP
+  //     })
+  //     .catch((err) => {
+  //       console.error(
+  //         `Error ${isAttending ? "canceling RSVP" : "RSVPing"} for event with ID: ${eventId}`,
+  //         err
+  //       ); // Debugging; delete this
+  //       setHasError(err);
+  //     });
+  // }
+
+// another way use `axios.get` in `useEffect` in `Home.jsx`
+// useEffect(() => {
+  //   const getEventData = (category) => {
+  //     console.log("Current Filter before API call:", currentFilter);
+  //     setIsLoading(true);
+  //     setHasError(null);
+
+  //     axios.get('/api/events', {
+  //       params: category ? { category } : undefined,
+  //     })
+  //       .then((response) => {
+  //         console.log("API Response:", response.data); // Debugging; delete this
+  //         setEvents(response.data);
+  //       })
+  //       .catch((err) => {
+  //         console.error("API Error:", err); // Debugging; delete this
+  //         setHasError(err);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       })
+  //   };
+
+  //   getEventData(currentFilter);
+  //   console.log("Current Filter", currentFilter);
+  // }, [currentFilter]);

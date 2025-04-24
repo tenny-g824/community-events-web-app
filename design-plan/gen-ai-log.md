@@ -582,3 +582,15 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
   }
 });
 ```
+
+## Milestone 3: Prompt to Design Loading Card and Error Message
+
+I used OpenAI ChatGPT as a tool to design my loading card and style my error message
+
+### Prompt for Loading Card
+
+***Prompt:** For my React component called `LoadingCard` that indicates that my event data is currently loading, use Tailwind CSS to design a clean, modern skeleton UI with an animated pulse effect. The card should include a placeholder image box and several gray bars of different widths to represent loading text, all with rounded corners and no borders. Make sure there is proper spacing.
+
+### Prompt for Error Message
+
+***Prompt:** For my React component called `ErrorAlert` that displays an error message when an event fails to load, style the ErrorAlert component using Tailwind CSS to create a fixed red banner at the top of the screen. Use bold white text for the error message to ensure high visibility. Add a clearly styled "Try Again" button with red text on a white background, rounded corners, and hover effects for better interactivity.

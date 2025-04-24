@@ -33,11 +33,9 @@ const db = conn.db('app');
 This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the events array, assuming the database connection `db` is already initialized (which it has).
 */
 app.get('/api/events', async (req, res) => {
-  // Simulate an error for testing and comment out error after tested the failure user experience
-  // throw new Error("test error")
+  // Simulate an error for testing and delete error after tested the failure user experience
 
   const category = req.query.category;
-  // const search = req.query.search;
 
   let filter = {};
 
@@ -193,12 +191,12 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
     );
 
     if (rsvpCancellation.modifiedCount > 0) {
-      return res.status(200).send();
+      res.status(200).send();
     } else {
-      return res.status(404).send();
+      res.status(404).send();
     }
   } else {
-    return res.status(404).send();
+    res.status(404).send();
   }
 });
 

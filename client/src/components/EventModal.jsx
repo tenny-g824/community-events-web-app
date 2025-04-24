@@ -13,13 +13,14 @@ export default function EventModal({ event, onModalClose }) {
                     className="cursor-pointer absolute top-4 right-3 w-10 h-10"
                 >
                     <img
-                        // Source: https://www.flaticon.com/free-icon/delete_11425359?term=x-icon&page=1&position=86&origin=search&related_id=11425359
+                        // Source: Grey x-Icon by Flaticon
+                        // Source URL: https://www.flaticon.com/free-icon/delete_11425359?term=x-icon&page=1&position=86&origin=search&related_id=11425359
                         src="/x-grey-icon.png"
                         alt="Close"
-                        // className="w-full h-full object-contain hover:opacity-80 transition duration-200"
                     />
                 </button>
 
+                {/* <div className="w-full h-[400px]"> */}
                 <div className="w-full h-[320px]">
                     <img
                         src={event.imageUri}
@@ -30,9 +31,9 @@ export default function EventModal({ event, onModalClose }) {
 
                 <div className="p-8 mt-20 text-slate-900">
                     <h2 className="text-3xl font-bold mb-4">{event.name}</h2>
-                    <p className="mb-6 font-medium">{event.description}</p>
+                    <p className="mb-6 font-medium">{event.description}</p> {/* text-lg */}
 
-                    <div className="space-y-2">
+                    <div className="space-y-2"> {/* text-lg */}
                         <p>
                             <strong>Date:</strong>{' '}
                             {new Date(event.dateAndTime).toLocaleDateString('en-US', {
