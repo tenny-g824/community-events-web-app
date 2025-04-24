@@ -15,7 +15,7 @@ export default function EventModal({ event, onModalClose }) {
                     <img
                         // Source: Grey x-Icon by Flaticon
                         // Source URL: https://www.flaticon.com/free-icon/delete_11425359?term=x-icon&page=1&position=86&origin=search&related_id=11425359
-                        src="/x-grey-icon.png"
+                        src="/images/x-grey-icon.png"
                         alt="Close"
                     />
                 </button>

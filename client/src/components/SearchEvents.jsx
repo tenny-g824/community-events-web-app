@@ -7,7 +7,7 @@ export default function SearchEvents() {
                 <img
                     // Source: Search Icon by Freepik - Flaticon
                     // Source URL: https://www.flaticon.com/free-icon/loupe_751381?term=search&page=1&position=32&origin=tag&related_id=751381
-                    src="/search-icon.png"
+                    src="/images/search-icon.png"
                     alt="Search"
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 w-7 h-7"
                 />

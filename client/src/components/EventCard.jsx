@@ -28,8 +28,6 @@ export default function EventCard({
                     Image Source:{' '}
                     <a
                         href={sourceUrl}
-                        target="_blank" // makes sure that the link opens in a new browser tab or window when it is clicked
-                        rel="noopener noreferrer"
                         className="text-blue-500 hover:underline"
                     >
                         {sourceName}

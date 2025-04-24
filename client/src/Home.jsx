@@ -35,7 +35,7 @@ export default function Home() {
   useEffect(() => {
     // request event JSON data from the server
     getEventData(currentFilter);
-    console.log("Get Events with Current Filter", currentFilter); // Debugging
+    // console.log("Get Events with Current Filter", currentFilter); // Debugging
   }, [currentFilter]);
 
   return (
@@ -118,6 +118,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 
 // inside <EventCard /> in Home.jsx

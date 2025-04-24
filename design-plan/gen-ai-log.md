@@ -583,14 +583,28 @@ app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
 });
 ```
 
-## Milestone 3: Prompt to Design Loading Card and Error Message
+## Milestone 3: Prompts to Design Loading Card, Error Message, Active Style for Chips
 
-I used OpenAI ChatGPT as a tool to design my loading card and style my error message
+I used OpenAI ChatGPT as a tool to create both my loading card and my error message. I also used it as a tool to help me set my chips from 'Active' to 'Unactive' and vice versa, as well as help me with image sources.
 
 ### Prompt for Loading Card
 
-***Prompt:** For my React component called `LoadingCard` that indicates that my event data is currently loading, use Tailwind CSS to design a clean, modern skeleton UI with an animated pulse effect. The card should include a placeholder image box and several gray bars of different widths to represent loading text, all with rounded corners and no borders. Make sure there is proper spacing.
+**Prompt:** For my React component called `LoadingCard` that indicates that my event data is currently loading, create a clean, modern skeleton UI with an animated pulse effect, and use Tailwind CSS to help you. The card should include a placeholder image box and several gray bars of different widths to represent loading text, all with rounded corners and no borders. Make sure there is proper spacing.
 
 ### Prompt for Error Message
 
-***Prompt:** For my React component called `ErrorAlert` that displays an error message when an event fails to load, style the ErrorAlert component using Tailwind CSS to create a fixed red banner at the top of the screen. Use bold white text for the error message to ensure high visibility. Add a clearly styled "Try Again" button with red text on a white background, rounded corners, and hover effects for better interactivity.
+**Prompt:** For my React component called `ErrorAlert` that displays an error message when an event fails to load, create a fixed red banner at the top of the screen using Tailwind css. Use bold white text for the error message to ensure high visibility. Add a clearly usable "Try Again" button with red text on a white background, rounded corners, and hover effects for better interactivity.
+
+### Prompt for Styling 'Active' Chips
+
+**Prompt:** Using Tailwind CSS, let the button already created in my Chip component change style based on whether it’s active or not. Use a darker background and white text when it's `active`, and a lighter blue with hover effects when it's `inactive`. Also add features like a focus ring and aria-pressed for accessibility.
+
+### Prompt for Citation
+
+**Prompt:** Give me examples of how to correctly cite a source that has a source name and a source URL in React using `<href>` for the `url` inside of the `<a></a>` tag.
+
+I also used OpenAI ChatGPT to help me create a new image for my `Health and Wellness Expo` Event:
+
+- Image URI: "/health-and-wellness-expo.png"
+- Source Name: "OpenAI ChatGPT",
+- Source URL: "https://chatgpt.com/c/6808197e-7eb8-8009-8f54-6af0b7c259bf"

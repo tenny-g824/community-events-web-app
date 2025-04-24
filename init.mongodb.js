@@ -6,7 +6,7 @@ db.createCollection('events');
 db.events.insertMany([
     {
         name: "Community Clean-Up Day",
-        imageUri: "/community-clean-up-img.jpg",
+        imageUri: "/images/community-clean-up-img.jpg",
         category: "volunteer",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-05-15T13:00:00Z"), // 9:00 AM EST
@@ -21,7 +21,7 @@ db.events.insertMany([
 
     {
         name: "Neighborhood Potluck",
-        imageUri: "/neighborhood-potluck-img.jpg",
+        imageUri: "/images/neighborhood-potluck-img.jpg",
         category: "socials",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-01-10T16:00:00Z"), // 12:00 PM EST
@@ -36,7 +36,7 @@ db.events.insertMany([
 
     {
         name: "Local History Walk",
-        imageUri: "/local-history-walk.jpg",
+        imageUri: "/images/local-history-walk.jpg",
         category: "culturalArts",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-05-20T18:00:00Z"), // 2:00 PM EST
@@ -51,7 +51,7 @@ db.events.insertMany([
 
     {
         name: "Community Garden Workshop",
-        imageUri: "/community-garden-workshop.jpg",
+        imageUri: "/images/community-garden-workshop.jpg",
         category: "educationalInfo",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-07-05T14:00:00Z"), // 10:00 AM EST
@@ -66,7 +66,7 @@ db.events.insertMany([
 
     {
         name: "Art in the Park",
-        imageUri: "/art-in-the-park-ppl-img.jpg",
+        imageUri: "/images/art-in-the-park-ppl-img.jpg",
         category: "culturalArts",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-10-05T15:00:00Z"), // 11:00 AM EST
@@ -75,14 +75,14 @@ db.events.insertMany([
         description: "Immerse yourself in creativity at this outdoor art festival featuring local artists, live painting sessions, and interactive art installations. Browse unique artwork available for purchase while enjoying live music and local food vendors. Activities for kids will be available throughout the day.",
         numberOfAttendees: 67,
         price: 0.00,
-        sourceName: "Golf Cart Rentals At Put-in-Bay",
+        sourceName: "Put-in-Bay",
         sourceUrl: "https://www.visitputinbay.org/event/art-in-the-park/",
         // altSourceUrlOption: https://www.bouldercity.com/event/art-in-the-park-2024/
     },
 
     {
         name: "Local Business Fair",
-        imageUri: "/local-business-fair.jpg",
+        imageUri: "/images/local-business-fair.jpg",
         category: "socials",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-09-01T13:30:00Z"), // 9:30 AM EST
@@ -97,7 +97,7 @@ db.events.insertMany([
 
     {
         name: "Volunteer Appreciation Day",
-        imageUri: "/volunteer-appreciation-day.png",
+        imageUri: "/images/volunteer-appreciation-day.png",
         category: "volunteer",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-04-20T20:00:00Z"), // 4:00 PM EST
@@ -112,7 +112,7 @@ db.events.insertMany([
 
     {
         name: "Youth Mentoring Meetup",
-        imageUri: "/youth-mentoring-meetup.jpg",
+        imageUri: "/images/youth-mentoring-meetup.jpg",
         category: "volunteer",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-03-25T21:00:00Z"), // 5:00 PM EST
@@ -127,7 +127,7 @@ db.events.insertMany([
 
     {
         name: "Senior Tech Day",
-        imageUri: "/senior-tech-day.jpg",
+        imageUri: "/images/senior-tech-day.jpg",
         category: "educationalInfo",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-06-20T13:15:00Z"), // 9:15 AM EST
@@ -143,7 +143,7 @@ db.events.insertMany([
 
     {
         name: "Environmental Awareness Fair",
-        imageUri: "/environmental-awareness-fair.jpg",
+        imageUri: "/images/environmental-awareness-fair.jpg",
         category: "educationalInfo",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-04-15T12:30:00Z"), // 8:30 AM EST
@@ -152,13 +152,13 @@ db.events.insertMany([
         description: "An engaging event aimed at promoting sustainability and eco-friendly living. Attend workshops on reducing waste, conserving energy, and protecting natural resources. Local environmental organizations will be present with interactive booths and giveaways.",
         numberOfAttendees: 49,
         price: 0.00,
-        sourceName: "Claire Roper-Browning | LinkedIn",
+        sourceName: "Roper-Browning (2024) | Environmental Awareness",
         sourceUrl: "https://www.linkedin.com/pulse/role-education-universities-promoting-environmental-roper-browning-eqntf/",
     },
 
     {
         name: "Multicultural Festival",
-        imageUri: "/multicultural-festival.png",
+        imageUri: "/images/multicultural-festival.png",
         category: "culturalArts",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-08-20T17:00:00Z"), // 1:00 PM EST
@@ -173,7 +173,7 @@ db.events.insertMany([
 
     {
         name: "Health and Wellness Expo",
-        imageUri: "/health-and-wellness-expo.png",
+        imageUri: "/images/health-and-wellness-expo.png",
         category: "healthRecreation",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-07-10T14:00:00Z"), // 10:00 AM EST
@@ -188,7 +188,7 @@ db.events.insertMany([
 
     {
         name: "Literacy Workshop",
-        imageUri: "/literacy-workshop-girl-reading.jpg",
+        imageUri: "/images/literacy-workshop-girl-reading.jpg",
         category: "educationalInfo",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-03-30T19:00:00Z"), // 3:00 PM EST
@@ -204,7 +204,7 @@ db.events.insertMany([
 
     {
         name: "Community Theatre Night",
-        imageUri: "/community-theatre-night.jpg",
+        imageUri: "/images/community-theatre-night.jpg",
         category: "culturalArts",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-12-18T23:00:00Z"), // 7:00 PM EST
@@ -219,7 +219,7 @@ db.events.insertMany([
 
     {
         name: "Neighborhood Block Party",
-        imageUri: "/neighborhood-block-party.jpg",
+        imageUri: "/images/neighborhood-block-party.jpg",
         category: "socials",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-06-29T20:00:00Z"), // 4:00 PM EST
@@ -234,7 +234,7 @@ db.events.insertMany([
 
     {
         name: "Food Bank Drive",
-        imageUri: "/food-bank-drive.jpg",
+        imageUri: "/images/food-bank-drive.jpg",
         category: "volunteer",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-08-13T13:00:00Z"), // 9:00 AM EST
@@ -249,7 +249,7 @@ db.events.insertMany([
 
     {
         name: "Blood Donation Camp",
-        imageUri: "/blood-donation-camp.jpg",
+        imageUri: "/images/blood-donation-camp.jpg",
         category: "healthRecreation",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-09-20T12:00:00Z"), // 8:00 AM EST
@@ -264,7 +264,7 @@ db.events.insertMany([
 
     {
         name: "Community Sports Day",
-        imageUri: "/community-sports-day.jpg",
+        imageUri: "/images/community-sports-day.jpg",
         category: "healthRecreation",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-11-15T14:00:00Z"), // 10:00 AM EST
@@ -279,7 +279,7 @@ db.events.insertMany([
 
     {
         name: "Town Hall Meeting",
-        imageUri: "/town-hall-meeting.jpg",
+        imageUri: "/images/town-hall-meeting.jpg",
         category: "educationalInfo",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-11-01T22:00:00Z"), // 6:00 PM EST
@@ -295,7 +295,7 @@ db.events.insertMany([
 
     {
         name: "Cornell Winter Charity Gala",
-        imageUri: "/cornell-winter-charity-gala.jpg",
+        imageUri: "/images/cornell-winter-charity-gala.jpg",
         category: "socials",
         // Subtract 4 hours from the UTC time to get EST time / Add 4 hours to EST time to convert to UTC time
         dateAndTime: new Date("2025-12-15T23:30:00Z"), // 7:30 PM
