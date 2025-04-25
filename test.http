@@ -97,9 +97,13 @@ POST /api/events/{{ events[15]._id }}/cancel-rsvp
 ### Text Search Only
 */
 ###
+# @ref events
+# @name text_search
 GET /api/events?q=community
 /*
 ### Text Search + Filter
 */
 ###
-GET /api/events?q=community&category={{"volunteer"}}
+# @ref events
+# @name text_search_and_filter
+GET /api/events?q=community&category=volunteer

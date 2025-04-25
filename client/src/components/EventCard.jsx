@@ -29,7 +29,7 @@
 //     //         // .catch((err) => {
 //     //         //     setHasError(err);
 //     //         // })
-//     //         // .finally(() => {
+//     //         // .finally(() => {  // delete this, don't need it
 //     //         //     setIsLoading(false);
 //     //         // })
 //     // };
@@ -56,13 +56,13 @@
 
 //         request
 //             .then(() => {
-//                 setIsAttending(!isAttending); // Ternary logic: true becomes false, false becomes true
+//                 setIsAttending(!isAttending);
 //                 // same as: setIsAttending(isAttending ? false : true);
 //             })
 //             // .catch((err) => {
 //             //     setHasError(err);
 //             // })
-//             // .finally(() => {
+//             // .finally(() => { // delete this, don't need it
 //             //     setIsLoading(false);
 //             // })
 //     }
@@ -147,13 +147,13 @@
 //                                 : 'bg-green-500 text-white hover:bg-green-600'
 //                         }`}
 //                     >
-//                         {isAttending ? 'Cancel RSVP' : 'RSVP'}
+//                         {isAttending ? 'Not Attending' : 'Attending'}
 //                     </button>
 //                 </div>
 
 //                 {/* {hasError && (
 //                     <p className="text-red-500 text-sm mt-2">
-//                         Error: Could not {isAttending ? 'Not Attending' : 'Attending'} to event. Try again.
+//                         Error: Could not {isAttending ? 'Cancel RSVP' : 'RSVP'} to event. Try again.
 //                     </p>
 //                 )} */}
 //             </div>
@@ -184,7 +184,7 @@ export default function EventCard({
 
         endpoint
             .then(() => {
-                setIsAttending(!isAttending); // Ternary logic: true becomes false, false becomes true
+                setIsAttending(!isAttending); // true becomes false, false becomes true
                 // same as: setIsAttending(isAttending ? false : true);
             })
     }
