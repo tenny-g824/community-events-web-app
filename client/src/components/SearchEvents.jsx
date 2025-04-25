@@ -1,6 +1,6 @@
 // search icon by the left of the search bar (an icon)
 
-export default function SearchEvents() {
+export default function SearchEvents({ value, onChange }) {
     return (
         <div className="mb-4 flex justify-center">
             <div className="relative w-4/5">
@@ -13,6 +13,8 @@ export default function SearchEvents() {
                 />
                 <input
                     type="text"
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
                     placeholder="Search Your Events. . ."
                     className="w-full pl-12 pr-4 py-3 rounded-xl text-lg border border-gray-400 hover:border-blue-600 focus:outline focus:outline-blue-600 transition-colors duration-200"
                 />

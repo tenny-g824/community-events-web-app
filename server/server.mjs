@@ -35,17 +35,40 @@ This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB
 app.get('/api/events', async (req, res) => {
   // Simulate an error for testing and delete error after tested the failure user experience
 
-  const category = req.query.category;
+  // const category = req.query.category;
 
-  let filter = {};
+  // let filter = {};
+
+  // if (category) {
+  //   filter.category = category;
+  //   // filter.category = { $in: [category] }; --> for an event being in an array of categories; an event listed in multiple categories
+  // }
+
+  // const events = await db.collection('events')
+  //   .find(filter)
+  //   .toArray();
+
+  // res.status(200).json(events);
+
+  // if (search) {
+  //   query.$text = { $search: search };
+  // }
+
+  const { q, category } = req.query;
+
+  const query = {};
+
+  if (q) {
+    query.$text = { $search: q };
+  }
 
   if (category) {
-    filter.category = category;
-    // filter.category = { $in: [category] }; --> for an event being in an array of categories; an event listed in multiple categories
+    query.category = category;
+    // query.category = { $in: [category] }; --> for an event being in an array of categories; an event listed in multiple categories
   }
 
   const events = await db.collection('events')
-    .find(filter)
+    .find(query)
     .toArray();
 
   res.status(200).json(events);

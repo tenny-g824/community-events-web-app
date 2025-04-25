@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useDebounce } from 'use-debounce';
 import SearchEvents from './components/SearchEvents';
 import Chip from './components/Chip';
 import EventCard from './components/EventCard';
@@ -13,13 +14,22 @@ export default function Home() {
   const [hasError, setHasError] = useState(undefined);
   const [chosenEvent, setChosenEvent] = useState(undefined);
   const [currentFilter, setCurrentFilter] = useState(undefined);
+  //const [searchHistory, setSearchHistory] = useState([]) // delete this
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch] = useDebounce(searchInput, 500);
 
   function getEventData() {
     setIsLoading(true);
     setHasError(undefined);
 
     axios.get('/api/events', {
-      params: currentFilter ? { category: currentFilter } : undefined,
+      params: debouncedSearch && currentFilter
+        ? { q: debouncedSearch, category: currentFilter }
+        : debouncedSearch
+          ? { q: debouncedSearch }
+          : currentFilter
+            ? { category: currentFilter }
+            : undefined
     })
       .then((response) => {
         setEvents(response.data);
@@ -35,8 +45,10 @@ export default function Home() {
   useEffect(() => {
     // request event JSON data from the server
     getEventData(currentFilter);
-    // console.log("Get Events with Current Filter", currentFilter); // Debugging
-  }, [currentFilter]);
+    // setSearchHistory((v) => [...v, debouncedSearch]) // delete this
+    console.log("Searched Term", debouncedSearch); // Debugging
+    console.log("Get Events with Current Filter", currentFilter); // Debugging
+  }, [debouncedSearch, currentFilter]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-100 via-white to-sky-100 p-8">
@@ -54,8 +66,24 @@ export default function Home() {
               Ithaca Community Engagement Events
             </h1>
 
-            <SearchEvents />
+            <SearchEvents value={searchInput} onChange={setSearchInput} />
           </div>
+
+
+          {/* delete this <div className="rounded-xl bg-gray-100 border border-gray-300 px-5 py-6 mb-8 shadow-sm">
+            <header className="mb-3">
+              <h2 className="text-gray-700 font-bold text-lg">
+                Previous Searches
+              </h2>
+            </header>
+            <ul className="space-y-1 list-inside list-decimal text-gray-900">
+              {searchHistory.map((term, i) => (
+                <li key={i} className="pl-2">
+                  {term || "Empty Search"}
+                </li>
+              ))}
+            </ul>
+          </div> */}
 
           <div className="my-12"></div>
 

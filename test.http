@@ -93,3 +93,13 @@ POST /api/events/{{ events[15]._id }}/rsvp
 # @ref events
 # @name cancel_rsvp
 POST /api/events/{{ events[15]._id }}/cancel-rsvp
+/*
+### Text Search Only
+*/
+###
+GET /api/events?q=community
+/*
+### Text Search + Filter
+*/
+###
+GET /api/events?q=community&category={{"volunteer"}}
