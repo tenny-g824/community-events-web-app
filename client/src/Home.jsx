@@ -123,7 +123,8 @@ export default function Home() {
             <div className="flex space-x-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {events.map((event) => (
                 <EventCard
-                  key={event._id}
+                  key={event._id} // is it fine to have both 'key' and 'id'
+                  id={event._id}
                   name={event.name}
                   imageUri={event.imageUri}
                   dateAndTime={event.dateAndTime}
@@ -146,48 +147,6 @@ export default function Home() {
     </div>
   );
 }
-
-
-
-
-// inside <EventCard /> in Home.jsx
-// isAttending={event.isAttending} // Pass the current RSVP state and show the intended button on front-end
-// onToggleRsvp={() => toggleRsvp(event._id, event.isAttending)} // Function for RSVP toggle when the button is clicked
-
-// function toggleRsvp(eventId, isAttending) {
-  //   const request = isAttending
-  //     ? axios.post(`/api/events/${eventId}/cancel-rsvp`) // Cancel RSVP if already attending
-  //     : axios.post(`/api/events/${eventId}/rsvp`); // RSVP if not attending
-
-  //   request
-  //     .then(() => {
-  //       console.log(
-  //         `${isAttending ? "Canceled RSVP" : "RSVP'd"} for event with ID: ${eventId}`
-  //       ); // Debugging; delete this
-  //       // Update the `events` state directly without using the spread operator
-  //       setEvents((prevEvents) =>
-  //         prevEvents.map((event) =>
-  //           event._id === eventId
-  //             ? {
-  //                 ...event,
-  //                 isAttending: !isAttending,
-  //                 // numberOfAttendees: isAttending
-  //                 //   ? event.numberOfAttendees - 1 // decrement
-  //                 //   : event.numberOfAttendees + 1, // increment
-  //               } // toggle the RSVP state
-  //             : event // Return the event
-  //         )
-  //       );
-  //       // getEventData(); // Refreshing the events after toggling RSVP
-  //     })
-  //     .catch((err) => {
-  //       console.error(
-  //         `Error ${isAttending ? "canceling RSVP" : "RSVPing"} for event with ID: ${eventId}`,
-  //         err
-  //       ); // Debugging; delete this
-  //       setHasError(err);
-  //     });
-  // }
 
 // another way use `axios.get` in `useEffect` in `Home.jsx`
 // useEffect(() => {
