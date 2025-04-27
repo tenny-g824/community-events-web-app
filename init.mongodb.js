@@ -316,6 +316,6 @@ db.events.createIndex(
         name: "text",
         summary: "text",
         description: "text",
-        // location: "text",
+        location: "text",
     }
 )

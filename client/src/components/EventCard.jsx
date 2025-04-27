@@ -15,37 +15,8 @@ export default function EventCard({
     const [isAttending, setIsAttending] = useState(false);
     const [hasError, setHasError] = useState(undefined);
 
-    // function rsvpToEvent() {
-    //     // setHasError(undefined);
-
-    //     axios.post(`/api/events/${name}/rsvp`)
-    //         .then(() => {
-    //             setIsAttending(true);
-    //         })
-    //         // .catch((err) => {
-    //         //     setHasError(err);
-    //         // })
-    //         // .finally(() => {  // delete this, don't need it
-    //         //     setIsLoading(false);
-    //         // })
-    // };
-
-    // function cancelRsvp() {
-    //     // setHasError(undefined);
-
-    //     axios.post(`/api/events/${name}/cancel-rsvp`)
-    //         .then(() => {
-    //             setIsAttending(false);
-    //         })
-    //         // .catch((err) => {
-    //         //     setHasError(err);
-    //         // })
-    //         // .finally(() => {
-    //         //     setIsLoading(false);
-    //         // })
-    // };
-
     function onToggleRsvp() {
+        console.log("RSVP Button Clicked", onClick);
         setHasError(undefined);
 
         const endpoint = isAttending
@@ -64,6 +35,35 @@ export default function EventCard({
             //     setIsLoading(false);
             // })
     }
+
+    // function onToggleRsvp() {
+    //     console.log("RSVP Button Clicked", onClick);
+    //     setHasError(undefined);
+
+    //     if (isAttending) {
+    //         console.log("Canceling RSVP...");
+    //         axios.post(`/api/events/${id}/cancel-rsvp`) // Cancel RSVP if already attending
+    //             .then(() => {
+    //                 console.log("RSVP canceled successfully");
+    //                 setIsAttending(false);
+    //             })
+    //             .catch((err) => {
+    //                 console.error("Error canceling RSVP:", err);
+    //                 setHasError(err);
+    //             });
+    //     } else {
+    //         console.log("Submitting RSVP...");
+    //         axios.post(`/api/events/${id}/rsvp`) // RSVP if not attending
+    //             .then(() => {
+    //                 console.log("RSVP submitted successfully");
+    //                 setIsAttending(true);
+    //             })
+    //             .catch((err) => {
+    //                 console.error("Error submitting RSVP:", err);
+    //                 setHasError(err);
+    //             });
+    //     }
+    // }
 
     return (
         <div className="bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow">
@@ -84,7 +84,7 @@ export default function EventCard({
                     <a
                         href={sourceUrl}
                         // target="_blank" // this opens the source link in a new tab
-                        // rel="noopener noreferrer"
+                        // rel="noopener noreferrer" // security and performance when opening links in a new tab (target="_blank").
                         className="text-blue-500 hover:underline"
                     >
                         {sourceName}

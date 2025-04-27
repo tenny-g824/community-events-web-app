@@ -1,28 +1,55 @@
 /*
-# Test the Server API
+## Test the Server API
 */
 @host http://localhost:8080
 /*
-## Get All Events
+### Get All Events
 */
 ###
 # @name events
 GET /api/events
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 15189
+etag: W/"3b55-eDray1jT2CQA4ZoA9XvkIpIdYe8"
+date: Sun, 27 Apr 2025 20:53:31 GMT
+connection: close
 /*
-## Get Event By ID
+### Get Event By ID
 */
 ###
 # @ref events
 # @name event_by_id
 GET /api/events/{{ events[0]._id }}
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 840
+etag: W/"348-pOuujCcJbyp0q5MWe4CPyljPJlI"
+date: Sun, 27 Apr 2025 20:53:33 GMT
+connection: close
 /*
-## Get Events by Specific Category
+### Get Events by Specific Category
 */
 ###
 # @name filtered_events
 GET /api/events?category={{"volunteer"}}
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 2855
+etag: W/"b27-K5xb7ub8AK5xvJP5pVGl77k9R+w"
+date: Sun, 27 Apr 2025 20:53:37 GMT
+connection: close
 /*
-## Create an Event
+### Create an Event
 */
 ###
 # @ref events
@@ -40,8 +67,17 @@ Content-Type: application/json
     "numberOfAttendees": 20,
     "price": 0.00
 }
+
+HTTP/1.1 201  - Created
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 583
+etag: W/"247-YUR75Jdj2Iw6mVVM4Fef5HHPnLc"
+date: Sun, 27 Apr 2025 20:53:40 GMT
+connection: close
 /*
-## Replace (Update) Existing Event
+### Replace (Update) Existing Event
 */
 ###
 # @ref events
@@ -59,8 +95,17 @@ Content-Type: application/json
   "numberOfAttendees": 150,
   "price": 10.00
 }
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 674
+etag: W/"2a2-DpXY84QTuSqhSYYf5oqFFf/T1us"
+date: Sun, 27 Apr 2025 20:53:41 GMT
+connection: close
 /*
-## Modify (Update) Existing Event
+### Modify (Update) Existing Event
 */
 ###
 # @ref events
@@ -72,38 +117,84 @@ Content-Type: application/json
     "numberOfAttendees": 100,
     "location": "Cascadilla Park, Ithaca, NY"
 }
+
+HTTP/1.1 404  - Not Found
+x-powered-by: Express
+access-control-allow-origin: *
+date: Sun, 27 Apr 2025 20:53:44 GMT
+connection: close
+content-length: 0
 /*
-## Delete Event
+### Delete Event
 */
 ###
 # @ref events
 # @name delete_event
 DELETE /api/events/{{ events[7]._id }}
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+date: Sun, 27 Apr 2025 20:53:48 GMT
+connection: close
+content-length: 0
 /*
-## RSVP to an Event
+### RSVP to an Event
 */
 ###
 # @ref events
 # @name rsvp_event
 POST /api/events/{{ events[15]._id }}/rsvp
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+date: Sun, 27 Apr 2025 20:53:49 GMT
+connection: close
+content-length: 0
 /*
-## Cancel RSVP to an Event
+### Cancel RSVP to an Event
 */
 ###
 # @ref events
 # @name cancel_rsvp
 POST /api/events/{{ events[15]._id }}/cancel-rsvp
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+date: Sun, 27 Apr 2025 20:53:51 GMT
+connection: close
+content-length: 0
 /*
 ### Text Search Only
 */
 ###
 # @ref events
 # @name text_search
-GET /api/events?q=community
+GET /api/events?q=food
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 4642
+etag: W/"1222-8DFnumJ3UROsXU3b95vzMAXnrug"
+date: Sun, 27 Apr 2025 20:53:53 GMT
+connection: close
 /*
 ### Text Search + Filter
 */
 ###
 # @ref events
 # @name text_search_and_filter
-GET /api/events?q=community&category=volunteer
+GET /api/events?q=food&category=socials
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 1604
+etag: W/"644-h+wJFHLfhTL2ZxZN4yvkiBaqJuY"
+date: Sun, 27 Apr 2025 20:53:55 GMT
+connection: close
