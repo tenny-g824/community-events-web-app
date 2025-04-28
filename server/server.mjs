@@ -15,25 +15,11 @@ app.use((req, res, next) => {
 
 // --- Change nothing above this line ---
 
-// // Delay every request by a few seconds
-// app.use((req, res, next) => {
-//   const delay = Math.floor(Math.random() * 4) * 1000;
-//   setTimeout(() => {
-//       next();
-//   }, delay);
-// });
-
-// Delay every request, including the search request, by a few seconds, except for the 'RSVP' and 'Cancel RSVP' routes
+// Delay every request by a few seconds (between 0 and 3 seconds)
 app.use((req, res, next) => {
-  // Skip delay for RSVP routes
-  if (req.path.includes('/api/events/') && (req.path.endsWith('/rsvp') || req.path.endsWith('/cancel-rsvp'))) {
-    return next();
-  }
-
-  // Random delay between 0 and 3 seconds
   const delay = Math.floor(Math.random() * 4) * 1000;
   setTimeout(() => {
-    next();
+      next();
   }, delay);
 });
 

@@ -14,10 +14,12 @@ export default function EventCard({
 }) {
     const [isAttending, setIsAttending] = useState(false);
     const [hasError, setHasError] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(false);
 
     function onToggleRsvp() {
         console.log("RSVP Button Clicked", onClick);
         setHasError(undefined);
+        setIsLoading(true);
 
         const endpoint = isAttending
             ? axios.post(`/api/events/${id}/cancel-rsvp`) // Cancel RSVP if already attending
@@ -31,39 +33,10 @@ export default function EventCard({
             .catch((err) => {
                 setHasError(err);
             })
-            // .finally(() => { // delete this, don't need it
-            //     setIsLoading(false);
-            // })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
-
-    // function onToggleRsvp() {
-    //     console.log("RSVP Button Clicked", onClick);
-    //     setHasError(undefined);
-
-    //     if (isAttending) {
-    //         console.log("Canceling RSVP...");
-    //         axios.post(`/api/events/${id}/cancel-rsvp`) // Cancel RSVP if already attending
-    //             .then(() => {
-    //                 console.log("RSVP canceled successfully");
-    //                 setIsAttending(false);
-    //             })
-    //             .catch((err) => {
-    //                 console.error("Error canceling RSVP:", err);
-    //                 setHasError(err);
-    //             });
-    //     } else {
-    //         console.log("Submitting RSVP...");
-    //         axios.post(`/api/events/${id}/rsvp`) // RSVP if not attending
-    //             .then(() => {
-    //                 console.log("RSVP submitted successfully");
-    //                 setIsAttending(true);
-    //             })
-    //             .catch((err) => {
-    //                 console.error("Error submitting RSVP:", err);
-    //                 setHasError(err);
-    //             });
-    //     }
-    // }
 
     return (
         <div className="bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow">
@@ -124,7 +97,11 @@ export default function EventCard({
                                 : 'bg-green-500 text-white hover:bg-green-600'
                         }`}
                     >
-                        {isAttending ? 'Not Attending' : 'Attending'}
+                        {isLoading ? (
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        ) : (
+                            isAttending ? 'Not Attending' : 'Attending'
+                        )}
                     </button>
                 </div>
 
@@ -137,3 +114,34 @@ export default function EventCard({
         </div>
     );
 }
+
+// another way to to toggle the RSVP using 'if-else' statement
+
+    // function onToggleRsvp() {
+    //     console.log("RSVP Button Clicked", onClick);
+    //     setHasError(undefined);
+
+    //     if (isAttending) {
+    //         console.log("Canceling RSVP...");
+    //         axios.post(`/api/events/${id}/cancel-rsvp`) // Cancel RSVP if already attending
+    //             .then(() => {
+    //                 console.log("RSVP canceled successfully");
+    //                 setIsAttending(false);
+    //             })
+    //             .catch((err) => {
+    //                 console.error("Error canceling RSVP:", err);
+    //                 setHasError(err);
+    //             });
+    //     } else {
+    //         console.log("Submitting RSVP...");
+    //         axios.post(`/api/events/${id}/rsvp`) // RSVP if not attending
+    //             .then(() => {
+    //                 console.log("RSVP submitted successfully");
+    //                 setIsAttending(true);
+    //             })
+    //             .catch((err) => {
+    //                 console.error("Error submitting RSVP:", err);
+    //                 setHasError(err);
+    //             });
+    //     }
+    // }

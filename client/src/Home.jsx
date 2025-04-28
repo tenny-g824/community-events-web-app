@@ -14,7 +14,6 @@ export default function Home() {
   const [hasError, setHasError] = useState(undefined);
   const [chosenEvent, setChosenEvent] = useState(undefined);
   const [currentFilter, setCurrentFilter] = useState(undefined);
-  //const [searchHistory, setSearchHistory] = useState([]) // delete this
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearch] = useDebounce(searchInput, 500);
 
@@ -45,7 +44,6 @@ export default function Home() {
   useEffect(() => {
     // request event JSON data from the server
     getEventData(currentFilter);
-    // setSearchHistory((v) => [...v, debouncedSearch]) // delete this
     console.log("Searched Term", debouncedSearch); // Debugging
     console.log("Get Events with Current Filter", currentFilter); // Debugging
   }, [debouncedSearch, currentFilter]);
@@ -123,7 +121,7 @@ export default function Home() {
             <div className="flex space-x-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {events.map((event) => (
                 <EventCard
-                  key={event._id} // is it fine to have both 'key' and 'id'
+                  key={event._id}
                   id={event._id}
                   name={event.name}
                   imageUri={event.imageUri}
