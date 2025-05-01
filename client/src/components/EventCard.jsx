@@ -17,7 +17,6 @@ export default function EventCard({
     const [isLoading, setIsLoading] = useState(false);
 
     function onToggleRsvp() {
-        console.log("RSVP Button Clicked", onClick);
         setHasError(undefined);
         setIsLoading(true);
 
@@ -115,11 +114,14 @@ export default function EventCard({
     );
 }
 
+
+
 // another way to to toggle the RSVP using 'if-else' statement
 
     // function onToggleRsvp() {
     //     console.log("RSVP Button Clicked", onClick);
     //     setHasError(undefined);
+    //     setIsLoading(true);
 
     //     if (isAttending) {
     //         console.log("Canceling RSVP...");
@@ -131,6 +133,9 @@ export default function EventCard({
     //             .catch((err) => {
     //                 console.error("Error canceling RSVP:", err);
     //                 setHasError(err);
+    //             })
+    //             .finally(() => {
+    //                  setIsLoading(false);
     //             });
     //     } else {
     //         console.log("Submitting RSVP...");
@@ -142,6 +147,9 @@ export default function EventCard({
     //             .catch((err) => {
     //                 console.error("Error submitting RSVP:", err);
     //                 setHasError(err);
+    //             })
+    //             .finally(() => {
+    //                  setIsLoading(false);
     //             });
     //     }
     // }

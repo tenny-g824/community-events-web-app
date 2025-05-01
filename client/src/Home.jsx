@@ -14,8 +14,8 @@ export default function Home() {
   const [hasError, setHasError] = useState(undefined);
   const [chosenEvent, setChosenEvent] = useState(undefined);
   const [currentFilter, setCurrentFilter] = useState(undefined);
-  const [searchInput, setSearchInput] = useState("");
-  const [debouncedSearch] = useDebounce(searchInput, 500);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch] = useDebounce(searchTerm, 500);
 
   function getEventData() {
     setIsLoading(true);
@@ -64,24 +64,8 @@ export default function Home() {
               Ithaca Community Engagement Events
             </h1>
 
-            <SearchEvents value={searchInput} onChange={setSearchInput} />
+            <SearchEvents value={searchTerm} onChange={setSearchTerm} />
           </div>
-
-
-          {/* delete this <div className="rounded-xl bg-gray-100 border border-gray-300 px-5 py-6 mb-8 shadow-sm">
-            <header className="mb-3">
-              <h2 className="text-gray-700 font-bold text-lg">
-                Previous Searches
-              </h2>
-            </header>
-            <ul className="space-y-1 list-inside list-decimal text-gray-900">
-              {searchHistory.map((term, i) => (
-                <li key={i} className="pl-2">
-                  {term || "Empty Search"}
-                </li>
-              ))}
-            </ul>
-          </div> */}
 
           <div className="my-12"></div>
 
@@ -145,6 +129,8 @@ export default function Home() {
     </div>
   );
 }
+
+
 
 // another way use `axios.get` in `useEffect` in `Home.jsx`
 // useEffect(() => {
