@@ -17,6 +17,7 @@ export default function EventCard({
     const [isLoading, setIsLoading] = useState(false);
 
     function onToggleRsvp() {
+        console.log('RSVP Button Clicked', onClick);
         setHasError(undefined);
         setIsLoading(true);
 
@@ -113,7 +114,6 @@ export default function EventCard({
         </div>
     );
 }
-
 
 
 // another way to to toggle the RSVP using 'if-else' statement

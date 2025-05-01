@@ -131,7 +131,6 @@ export default function Home() {
 }
 
 
-
 // another way use `axios.get` in `useEffect` in `Home.jsx`
 // useEffect(() => {
   //   const getEventData = (category) => {
