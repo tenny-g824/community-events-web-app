@@ -1,5 +1,5 @@
 {
-  "name": "community-events-app",
+  "name": "community-events-web-app",
   "private": true,
   "workspaces": [
     "client",
