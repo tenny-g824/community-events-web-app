@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { MongoClient, ObjectId } from 'mongodb';
+import { defaultEvents } from './seedData.js';
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
@@ -23,10 +24,98 @@ app.use((req, res, next) => {
   }, delay);
 });
 
-// Connect to MongoDB
-const client = new MongoClient('mongodb://localhost:27017');
-const conn = await client.connect();
-const db = conn.db('app');
+// Connect to MongoDB and seed data, otherwise use in-memory store
+let db;
+let usingInMemory = false;
+let inMemoryEvents = defaultEvents.map((event, idx) => ({
+  ...event,
+  _id: (event._id || `${idx + 1}`)
+}));
+
+const inMemoryCollection = {
+  find(filter = {}) {
+    let results = [...inMemoryEvents];
+    if (filter.$text?.$search) {
+      const search = filter.$text.$search.toString().toLowerCase();
+      results = results.filter((evt) =>
+        (evt.name || '').toLowerCase().includes(search) ||
+        (evt.summary || '').toLowerCase().includes(search) ||
+        (evt.description || '').toLowerCase().includes(search)
+      );
+    }
+    if (filter.category) {
+      results = results.filter((evt) => evt.category === filter.category);
+    }
+    return { toArray: async () => results };
+  },
+  async findOne(filter) {
+    if (filter._id) {
+      return inMemoryEvents.find((evt) => String(evt._id) === String(filter._id));
+    }
+    return null;
+  },
+  async insertOne(doc) {
+    const newEvent = { ...doc, _id: `${Date.now()}-${Math.random().toString(36).slice(2)}` };
+    inMemoryEvents.push(newEvent);
+    return { insertedId: newEvent._id };
+  },
+  async replaceOne(filter, doc) {
+    const idx = inMemoryEvents.findIndex((evt) => String(evt._id) === String(filter._id));
+    if (idx === -1) {
+      return { modifiedCount: 0 };
+    }
+    inMemoryEvents[idx] = { ...doc, _id: inMemoryEvents[idx]._id };
+    return { modifiedCount: 1 };
+  },
+  async updateOne(filter, update) {
+    const idx = inMemoryEvents.findIndex((evt) => String(evt._id) === String(filter._id));
+    if (idx === -1) {
+      return { modifiedCount: 0 };
+    }
+    if (update.$set) {
+      inMemoryEvents[idx] = { ...inMemoryEvents[idx], ...update.$set };
+    } else if (update.$inc) {
+      Object.entries(update.$inc).forEach(([key, incValue]) => {
+        inMemoryEvents[idx][key] = (inMemoryEvents[idx][key] || 0) + incValue;
+      });
+    }
+    return { modifiedCount: 1 };
+  },
+  async deleteOne(filter) {
+    const idx = inMemoryEvents.findIndex((evt) => String(evt._id) === String(filter._id));
+    if (idx === -1) {
+      return { deletedCount: 0 };
+    }
+    inMemoryEvents.splice(idx, 1);
+    return { deletedCount: 1 };
+  }
+};
+
+try {
+  const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+  const client = new MongoClient(mongoUri, { serverSelectionTimeoutMS: 2000 });
+  await Promise.race([
+    client.connect(),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 3000))
+  ]);
+  const mongoDb = client.db(process.env.DB_NAME || 'app');
+
+  const eventCount = await mongoDb.collection('events').countDocuments();
+  if (eventCount === 0) {
+    console.log('Seeding default events in MongoDB...');
+    await mongoDb.collection('events').insertMany(defaultEvents.map((e) => ({ ...e })));
+  }
+  db = mongoDb;
+  console.log('Connected to MongoDB at', mongoUri);
+} catch (err) {
+  console.warn('MongoDB connection failed; using in-memory database fallback.', err.message);
+  usingInMemory = true;
+  db = { collection: () => inMemoryCollection };
+}
+
+const isValidId = (id) => usingInMemory ? !!id : ObjectId.isValid(id);
+const toId = (id) => usingInMemory ? id : new ObjectId(id);
+
 
 /*
 This GET endpoint from OpenAI ChatGPT correctly gets all events from the MongoDB 'events' collection, optionally filtering by a 'category' query parameter. It creates a filter only if the parameter exists, using .find().toArray() to return either all events or only those matching the category. A 200 OK response is returned with the events array, assuming the database connection `db` is already initialized (which it has).
@@ -58,9 +147,9 @@ app.get('/api/events', async (req, res) => {
 This GET endpoint from OpenAI ChatGPT gets a single event by its MongoDB ObjectId. The code first checks if the ID is valid using ObjectId.isValid(), then queries the 'events' collection to find a matching document using findOne(). A 200 status is returned with the event data if it is found, else it returns a 404 if the event is not found or does not exist.
 */
 app.get('/api/events/:id', async (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    const id = new ObjectId(req.params.id);
-    const event = await db.collection('events').findOne({ _id: new ObjectId(id) });
+  if (isValidId(req.params.id)) {
+    const id = toId(req.params.id);
+    const event = await db.collection('events').findOne({ _id: id });
 
     if (event) {
       res.status(200).json(event);
@@ -91,8 +180,8 @@ app.post('/api/events', async (req, res) => {
 This PUT endpoint from OpenAI ChatGPT fully replaces an event document using its ObjectId; however Gen AI checks if the `updateEvent` object exists and if it includes both the name and category which is unnecessary since we can already assume that a valid JSON object will be sent in the request body. The code then correctly validates the ID, and the existing document is replaced using updateOne() and removes the `_id` field, which prevents MongoDB update errors. A 200 status code returns the updated document if successful, else a 404 status code is returned if no document is matched.
 */
 app.put('/api/events/:id', async (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    const id = new ObjectId(req.params.id);
+  if (isValidId(req.params.id)) {
+    const id = toId(req.params.id);
     const updateEvent = req.body;
 
     delete updateEvent._id; // Remove _id field from the request body
@@ -118,8 +207,8 @@ app.put('/api/events/:id', async (req, res) => {
 This PATCH endpoint from OpenAI ChatGPT partially updates an event by modifying only the specified fields; however Gen AI checks for the request body and whether partiallyUpdateEvent is empty which is unnecessary as a valid JSON object is already assumed to be sent in the request body. It validates the event ID and makes sure that that there's at least one field to update/modify before applying changes using MongoDB’s $set operator with updateOne(). It checks whether the update modified any document and returns the updated document with a 200 status code if successful. A 404 status code is returned if there is missing data or invalid ID.
 */
 app.patch('/api/events/:id', async (req, res) => {
-  if (ObjectId.isValid(req.params.id)) {
-    const id = new ObjectId(req.params.id);
+  if (isValidId(req.params.id)) {
+    const id = toId(req.params.id);
     const partiallyUpdateEvent = req.body;
 
     // Partially update the event
@@ -144,8 +233,9 @@ This DELETE endpoint from OpenAI ChatGPT correctly removes an event based on its
 */
 app.delete('/api/events/:id', async (req, res) => {
   const id = req.params.id;
-  if (ObjectId.isValid(id)) {
-    const deleteEvent = await db.collection('events').deleteOne({ _id: new ObjectId(id) });
+  if (isValidId(id)) {
+    const _id = toId(id);
+    const deleteEvent = await db.collection('events').deleteOne({ _id });
 
     if (deleteEvent.deletedCount > 0) {
       res.status(200).send();
@@ -163,8 +253,8 @@ This POST endpoint from OpenAI ChatGPT correctly confirms an RSVP by incrementin
 app.post('/api/events/:id/rsvp', async (req, res) => {
   const id = req.params.id;
 
-  if (ObjectId.isValid(id)) {
-    const eventId = new ObjectId(id);
+  if (isValidId(id)) {
+    const eventId = toId(id);
     const rsvpConfirmation = await db.collection('events').updateOne(
       { _id: eventId },
       { $inc: { numberOfAttendees: 1 } }
@@ -186,8 +276,8 @@ This POST endpoint from OpenAI ChatGPT correctly cancels an existing RSVP by dec
 app.post('/api/events/:id/cancel-rsvp', async (req, res) => {
   const id = req.params.id;
 
-  if (ObjectId.isValid(id)) {
-    const eventId = new ObjectId(id);
+  if (isValidId(id)) {
+    const eventId = toId(id);
     const rsvpCancellation = await db.collection('events').updateOne(
       { _id: eventId },
       { $inc: { numberOfAttendees: -1 } }
